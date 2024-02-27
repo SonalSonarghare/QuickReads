@@ -210,7 +210,9 @@ form.sign-in-form {
     top: -20px; /* Adjust this value to move it up */
     left: 20px; /* Adjust this value to move it to the right */
 }
-
+.right-panel .content h1{
+  margin-top: 30px;
+}
 .panel .content {
 
   color: #F5F5DC;
@@ -230,22 +232,23 @@ form.sign-in-form {
   padding: 0.7rem 0;
 }
 .icon-text-container {
-    display: flex;
-    /*align-items: center;*/
-    margin-bottom: 30px; /* Adjust as needed */
-  }
-  
-  .icon-text-container i {
-    margin-right: 10px; /* Adjust as needed */
-  }
+  display: flex;
+  align-items: center; /* This line aligns the icons vertically with the text */
+  margin-bottom: 10px; /* Adjust as needed */
+}
+
+.icon-text-container i {
+  margin-right: 20px; /* Adjust as needed */
+  margin-bottom:-30px;
+}
 .btn.transparent {
-  margin: 0;
+  margin-bottom: 20px;
   background: none;
   border: 2px solid #F5F5DC;
   width: 130px;
-  height: 41px;
-  font-weight: 600;
-  font-size: 0.8rem;
+  height: 50px;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
 .btn.transparent:hover {
