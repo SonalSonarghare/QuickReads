@@ -9,10 +9,10 @@ def Login(request):
     return HttpResponse("Welcome to QuickReads")
 
 def Register(request):
-    return HttpResponse("Register")
+    return render(request,"home.html")
 
 def Home(request):
-    return HttpResponse("Home")
+    return render(request,"home.html")
 
 def Home_articles(request,article1):
     return HttpResponse(article1)
