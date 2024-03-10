@@ -15,9 +15,16 @@ body {
 /* Header styles */
 header {
   background-color: #800020;
-  padding: 10px 0;
+  padding: 30px 0;
+  position: fixed; /* Fix the header at the top of the viewport */
+  width: 100%; /* Ensure the header spans the full width of the viewport */
+  z-index: 1000; /* Ensure the header appears above other content */
 }
 
+/* Add padding to the body to compensate for the fixed header */
+body {
+  padding-top: -20px; /* Adjust as needed based on the header height */
+}
 /* Logo styles */
 .logo {
   position: absolute;
@@ -118,14 +125,14 @@ nav a:hover {
 /* Hero section styles */
 .hero {
   background-color: #fff; /* Background color */
-  padding: 80px 0; /* Top and bottom padding */
+  padding: 180px 0; /* Top and bottom padding */
   text-align: center; /* Center-align content */
 }
 
 .hero h1 {
   font-size: 36px; /* Font size for the heading */
   color: #800020; /* Text color */
-  margin-top:-80px /* Bottom margin */
+  margin-top:-70px /* Bottom margin */
 }
 
 .hero p {
@@ -162,7 +169,7 @@ nav a:hover {
 /* Topics section styles */
 .Topics {
   background-color: #ddd; /* Background color */
-  margin-top: -160px;
+  margin-top: -250px;
   padding: 10px 0; /* Top and bottom padding */
   text-align: center; /* Center-align content */
 }
@@ -201,6 +208,7 @@ nav a:hover {
   margin-left: -80px;
   max-width: 150%; /* Set maximum width to fill the container */
   max-height: 150%; /* Set maximum height to fill the container */
+  
 }
 .box a.btn {
   display: inline-block;
@@ -227,4 +235,87 @@ nav a:hover {
 .box:nth-child(2) img {
   margin-left: -10px; /* Adjust the left margin for the HEALTH box */
 }
+/*Footer*/
+footer {
+  background-color: #333; /* Background color */
+  color: #fff; /* Text color */
+  padding: 20px 0; /* Padding */
+}
 
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+footer h1 {
+  margin-top:-10px;
+  text-align: center; /* Center-align the text */
+}
+
+.sources {
+  text-align: center; /* Center-align content */
+}
+
+.sources h1 {
+  font-size: 20px; /* Font size for the heading */
+}
+
+.sources ul {
+  list-style: none; /* Remove bullet points */
+  padding: 0;
+}
+
+.sources ul li {
+  display: inline-block;
+  margin: 0 20px; /* Add spacing between logos */
+  border-radius: 50%; /* Create circular shape */
+  overflow: hidden; /* Hide overflow content */
+  background-color: #fff; /* Background color for circle */
+  width: 90px; /* Increase width */
+  height: 90px; /* Increase height */
+  text-align: center; /* Center-align content */
+  line-height: 80px; /* Vertical center alignment */
+}
+
+.sources ul li img {
+  max-width: 90%; /* Ensure the image fits within the circle */
+  max-height: 90%; /* Ensure the image fits within the circle */
+}
+
+.sources ul li:nth-child(2) {
+  line-height: 120px; /* Adjust line-height to move the image down */
+}
+.sources ul li:nth-child(3) img {
+  max-width: 100%; /* Ensure the image fits within the circle */
+  max-height: 100%; /* Ensure the image fits within the circle */
+  width: 120px; /* Increase the width */
+  height: 120px; /* Increase the height */
+}
+.sources ul li:nth-child(4) img {
+  max-width: 100%; /* Ensure the image fits within the circle */
+  max-height: 100%; /* Ensure the image fits within the circle */
+  width: 120px; /* Increase the width */
+  height: 120px; /* Increase the height */
+}
+.sources ul li:nth-child(7) img {
+  max-width: 100%; /* Ensure the image fits within the circle */
+  max-height: 100%; /* Ensure the image fits within the circle */
+  width: 140px; /* Increase the width */
+  height: 140px; /* Increase the height */
+}
+.sources ul li:nth-child(8) img {
+  max-width: 100%; /* Ensure the image fits within the circle */
+  max-height: 100%; /* Ensure the image fits within the circle */
+  width: 180px; /* Increase the width */
+  height: 180px; /* Increase the height */
+}
+.sources ul li:nth-child(9) img {
+  max-width: 100%; /* Ensure the image fits within the circle */
+  max-height: 100%; /* Ensure the image fits within the circle */
+  width: 80px; /* Increase the width */
+  height: 70px; /* Increase the height */
+}
+
+.sources ul li:nth-child(9) {
+  line-height: 150px; /* Adjust line-height to move the image down */
+}

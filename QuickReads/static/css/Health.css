@@ -1,0 +1,330 @@
+/* Basic styles */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ddd;
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Header styles */
+  header {
+    background-color: #800020;
+    padding: 30px 0;
+    position: fixed; /* Fix the header at the top of the viewport */
+    width: 100%; /* Ensure the header spans the full width of the viewport */
+    z-index: 1000; /* Ensure the header appears above other content */
+  }
+  
+  /* Add padding to the body to compensate for the fixed header */
+  body {
+    padding-top: -20px; /* Adjust as needed based on the header height */
+  }
+  /* Logo styles */
+  .logo {
+    position: absolute;
+    left: 10px;
+    top: -3px;
+  }
+  
+  header h1 {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #F5F5DC;
+    margin: 0;
+    margin-left: -390px;
+    text-decoration: underline;
+    text-underline-offset: 10px;
+  }
+  
+  /* Navigation styles */
+  nav {
+   text-align: right; /* Shift all contents to the right */
+  }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 26px;
+    margin-right: -500px; /* Set the font size to 24px */
+    margin-top: -40px;
+  }
+  
+  nav li {
+    display: inline-block;
+    margin-right: 60px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #F5F5DC;
+  }
+  
+  nav a:hover {
+    color: #000000; /* Change color on hover */
+  }
+  
+  /* Dropdown styles */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #F5F5DC;
+    min-width: 160px;
+    z-index: 1;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    left: -100px; /* Adjust this value to move the dropdown to the left */
+    top: 30px;
+    border-radius: 8px; /* Rounded corners */
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex; /* Use flexbox to align icon and text */
+    align-items: center; /* Align items vertically */
+  }
+  
+  .dropdown-content a i {
+    margin-right: 20px; /* Adjust this value to add spacing between icon and text */
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd; /* Hover background color */
+  }
+  
+  .dropdown-content a:hover i,
+  .dropdown-content a:hover {
+    color: #800020; /* Change text and icon color on hover */
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropbtn {
+    font-size: 26px;
+    color: #F5F5DC;
+    text-decoration: none;
+    transition: color 0.3s; /* Smooth transition effect */
+  }
+  
+  .dropbtn:hover {
+    color: #800020; /* Change color on hover */
+  }
+  
+  /* Hero section styles */
+  .hero {
+    height: 900px;
+    background: url("/static/img/Topics/Health.png") no-repeat;
+    background-size: 100% 80%; /* Stretch the image to cover the entire container */
+    background-position: center; /* Center the image horizontally */
+  }
+  .hero h1 {
+    font-size: 36px; /* Font size for the heading */
+    color: #800020; /* Text color */
+    margin-top:-70px /* Bottom margin */
+  }
+  
+  .hero p {
+    font-size: 22px; /* Font size for the paragraph */
+    color: #333; /* Text color */
+    margin-top:-20px /* Bottom margin */
+  }
+  
+  /* Foryou section styles */
+  .foryou {
+    background-color: #fff; /* Background color */
+    padding: 80px 0; /* Top and bottom padding */
+    margin-top: -40px;
+    margin-right:1600px; /* Center-align content */
+  }
+  
+  .foryou h1 {
+    font-size: 40px; /* Font size for the heading */
+    font-weight: 900;
+    color: #800020; /* Text color */
+    margin-right:55px;
+    margin-top:-80px /* Bottom margin */
+  }
+  
+  .foryou p {
+    font-size: 22px; /* Font size for the paragraph */
+    font-weight: bold;
+    color: #333; /* Text color */
+    margin-left:40px;
+    margin-top:-20px /* Bottom margin */
+  }
+  
+  
+  /* Topics section styles */
+  .Topics {
+    background-color: #ddd; /* Background color */
+    margin-top: -250px;
+    padding: 10px 0; /* Top and bottom padding */
+    text-align: center; /* Center-align content */
+  }
+  
+  .Topics h1 {
+    font-size: 50px; /* Font size for the heading */
+    color: #800020; /* Text color */
+    margin-top: 10px;
+  }
+  
+  .box-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 150px;
+    margin-top: -30px; /* Spacing between heading and boxes */
+  }
+  
+  .box {
+    width: 350px; /* Set the width of individual boxes */
+    height: 300px;
+    padding: 90px; /* Adjust padding to reduce box height */
+    margin: 20px; /* Add margin to create space between boxes */
+    background-color: #fff; /* Background color of boxes */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a slight elevation effect */
+    transition: background-color 0.3s ease; /* Smooth transition effect */
+  }
+  
+  .box:hover {
+    background-color: #440100; /* Change background color on hover */
+  }
+  
+  .box img {
+    
+    margin-top:-70px;
+    margin-left: -80px;
+    max-width: 150%; /* Set maximum width to fill the container */
+    max-height: 150%; /* Set maximum height to fill the container */
+    
+  }
+  .box a.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px; /* Spacing between heading and button */
+    background-color: #440100; /* Button background color */
+    color: #fff; /* Button text color */
+    text-decoration: none;
+    border-radius: 4px; /* Rounded corners for buttons */
+    transition: transform 0.3s linear; /* Smooth transition for transform */
+  }
+  
+  .box:hover a.btn {
+    background-color: #fff; /* Change button background color on hover */
+    color: #440100; /* Change button text color on hover */
+  }
+  
+  .box a.btn:hover {
+    background-color: #fff; /* Change button background color on hover */
+    color: #440100; /* Change button text color on hover */
+    transform: scale(1.2); /* Move button 10px to the right on hover */
+  }
+  
+  .box:nth-child(2) img {
+    margin-left: -10px; /* Adjust the left margin for the HEALTH box */
+  }
+  /*Footer*/
+  footer {
+    background-color: #333; /* Background color */
+    color: #fff; /* Text color */
+    padding: 20px 0; /* Padding */
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  footer h1 {
+    margin-top:-10px;
+    text-align: center; /* Center-align the text */
+  }
+  
+  .sources {
+    text-align: center; /* Center-align content */
+  }
+  
+  .sources h1 {
+    font-size: 20px; /* Font size for the heading */
+  }
+  
+  .sources ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+  }
+  
+  .sources ul li {
+    display: inline-block;
+    margin: 0 20px; /* Add spacing between logos */
+    border-radius: 50%; /* Create circular shape */
+    overflow: hidden; /* Hide overflow content */
+    background-color: #fff; /* Background color for circle */
+    width: 90px; /* Increase width */
+    height: 90px; /* Increase height */
+    text-align: center; /* Center-align content */
+    line-height: 80px; /* Vertical center alignment */
+  }
+  
+  .sources ul li img {
+    max-width: 90%; /* Ensure the image fits within the circle */
+    max-height: 90%; /* Ensure the image fits within the circle */
+  }
+  
+  .sources ul li:nth-child(2) {
+    line-height: 120px; /* Adjust line-height to move the image down */
+  }
+  .sources ul li:nth-child(3) img {
+    max-width: 100%; /* Ensure the image fits within the circle */
+    max-height: 100%; /* Ensure the image fits within the circle */
+    width: 120px; /* Increase the width */
+    height: 120px; /* Increase the height */
+  }
+  .sources ul li:nth-child(4) img {
+    max-width: 100%; /* Ensure the image fits within the circle */
+    max-height: 100%; /* Ensure the image fits within the circle */
+    width: 120px; /* Increase the width */
+    height: 120px; /* Increase the height */
+  }
+  .sources ul li:nth-child(7) img {
+    max-width: 100%; /* Ensure the image fits within the circle */
+    max-height: 100%; /* Ensure the image fits within the circle */
+    width: 140px; /* Increase the width */
+    height: 140px; /* Increase the height */
+  }
+  .sources ul li:nth-child(8) img {
+    max-width: 100%; /* Ensure the image fits within the circle */
+    max-height: 100%; /* Ensure the image fits within the circle */
+    width: 180px; /* Increase the width */
+    height: 180px; /* Increase the height */
+  }
+  .sources ul li:nth-child(9) img {
+    max-width: 100%; /* Ensure the image fits within the circle */
+    max-height: 100%; /* Ensure the image fits within the circle */
+    width: 80px; /* Increase the width */
+    height: 70px; /* Increase the height */
+  }
+  
+  .sources ul li:nth-child(9) {
+    line-height: 150px; /* Adjust line-height to move the image down */
+  }
+
+.flood{
+    min-height:70vh;
+    display:flex;
+    align-items:center;
+    background:url("/static/images/floodbg.jpg") no-repeat;
+    background-size:cover;
+    background-position: center;
+}

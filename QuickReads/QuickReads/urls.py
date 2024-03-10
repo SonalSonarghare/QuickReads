@@ -22,7 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.Index),  # Define the root URL pattern
     path('index/', views.Index),
-    path('Register/',views.Register),
     path('Home/',views.Home),
-    path('Home/<slug:article1>',views.Home_articles),
+    path('Health/',views.Health),
 ]
