@@ -10,3 +10,4 @@ def Home(request):
 
 def Health(request):
     return render(request, "Health.html")
+

@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script
-      src="https://kit.fontawesome.com/64d58efce2.js"
-      crossorigin="anonymous"
-    ></script>
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
   <title>QuickReads | Your Daily Article Dose</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <link rel="stylesheet" href="/static/css/Health.css">
+  <style>
+    /* Your CSS styles here */
+  </style>
 </head>
 <body>
   <header>
@@ -36,25 +36,76 @@
             </div>
           </li>
         </ul>
-
       </nav>
     </div>
   </header>
 
   <section class="hero">
-      
+    <div class="container">
+      <h1>#HEALTH</h1>
+      <p>Get the latest articles and news about Health on QuickReads.<br>
+         Discover our growing collection of curated stories on Health.</p>
+    </div>
+    <div class="foryou">
+      <h1>FOR YOU <a href="#"><i class="fa-solid fa-sliders" style="color: #333;"></i></a></h1>
+      <p>The best of everything you follow</p>
+    </div>
   </section>
 
-  
-<!--support section starts-->
-<section class="Topics"id="Topics">
-  <h1 >Topics</h1>
-  <div class="box-container">
-    
-      <div class="box">
-          <img src="/static/img/health.png"alt="">
-              <a href="/flood"class="btn">HEALTH</a>
+  <section class="Topics" id="Topics">
+    <div class="box-container">
+      <div class="flip-container box" onclick="flipCard(this, event)">
+        <div class="flipper">
+          <div class="front">
+            <div class="circle-logo">
+              <a href="https://www.healthline.com/" target="_blank">
+                <img src="/static/img/Topics/1.png" alt="Healthline">
+                <h1>Healthline</h1>
+              </a>
+            </div>
+            <div class="photo">
+              <a href="https://www.healthline.com/health-news/eating-ultra-processed-foods-linked-to-32-health-issues-like-heart-disease" target="_blank">
+                <img src="https://media.post.rvohealth.io/wp-content/uploads/2024/02/fast-food-drivethru-1296x728-header-1296x729.jpg" alt="Article Image">
+              </a>
+            </div>
+            <div class="date">
+              Feb 29 2024
+            </div>
+            <div class="title">
+              <a href="https://www.healthline.com/health-news/eating-ultra-processed-foods-linked-to-32-health-issues-like-heart-disease" target="_blank">
+                Eating Ultra-Processed Foods Linked to 32 Health Issues Like Heart Disease
+              </a>
+            </div>
+            <div class="content">
+              A new study suggests that consumption of ultra-processed foods is linked to 32 adverse health outcomes like cancer, heart disease, type 2 diabetes…
+            </div>
+            <div class="userdata">
+              <i class="fa-regular fa-heart" onclick="toggleHeart(this)"></i><span class="heart-count"> 0</span> 
+              <i class="fa-regular fa-comment-dots"></i> <span class="comment-count">0</span>
+              <i class="fa-regular fa-bookmark"></i>
+              <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            </div>
+            <div class="comment-box" style="display: none;">
+              <textarea placeholder="Write your comment here..."></textarea>
+              <button class="submit-comment">Submit</button>
+            </div>
+          </div>
+          <div class="back">
+            <div class="read_aloud">
+                <button class="read-aloud-btn"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="summary">
+                High exposure to ultra-processed foods like sodas, candy, pre-packaged meat, sugary cereals, and potato chips is connected to an increased risk of 32 health issues including cancer, cardiovascular, gastrointestinal, and respiratory disorders, depression, anxiety, and early death, according to a new study published in The BMJ on February 28. The researchers reported there was "convincing evidence" of the following conditions being linked to eating ultra-processed foods: Around a 50% higher risk of cardiovascular disease-related death, up to a 53% higher risk of anxiety and common mental health conditions, and a 12% greater risk of type 2 diabetes. Takeaway: A new study suggests that consumption of ultra-processed foods is linked to 32 adverse health outcomes like cancer, heart disease, type 2 diabetes, depression, and early death.
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- Add more flip-container boxes here if needed -->
+
+    </div>
+  </section>
+      
 
       <div class="box">
           <img src="/static/img/Tech.png"alt="">
@@ -125,6 +176,7 @@
 </footer>
 
 
-  <script src="/static/js/home.js"></script>
+<script src="/static/js/health.js">
+</script>
 </body>
 </html>
