@@ -56,9 +56,12 @@
       color: white;
       border: 2px solid white;
       background-color: transparent;
-      padding: 10px 20px;
+      padding: 5px 30px;
       font-size: 1.2em;
       cursor: pointer;
+      position: absolute; /* Add position: absolute; */
+      left: -40px; /* Adjust left positioning as needed */
+      top: 90%; /* Adjust top positioning as needed */
     }
     .btn.transparent:hover {
       color: #800020; /* Change color to desired color on hover */
@@ -95,31 +98,21 @@
     <!-- Forms Container -->
     <div class="forms-container">
       <div class="signin-signup">
-        <!-- Your login form here -->
-        <form method="POST" autocomplete="off">
-            {% csrf_token %}
-            <!--{{registerform.as_p}}-->
-
             <h2 class="title">SIGN UP</h2>
             <div class="input-field">
-                <i class="fas fa-user"></i>
-                {{registerform.username}}
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Username" />
             </div>
             <div class="input-field">
-                <i class="fas fa-envelope"></i>
-                {{registerform.email}}
+              <i class="fas fa-envelope"></i>
+              <input type="email" placeholder="Email" />
             </div>
             <div class="input-field">
-                <i class="fas fa-lock"></i>
-                {{registerform.password1}}
-            </div>
-            <div class="input-field">
-                <i class="fas fa-lock"></i>
-                {{registerform.password2}}
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" />
             </div>
             <input type="submit" class="btn" value="Sign up" />
-        </form>
-        <!-- End of login form -->
+
         <p class="social-text">Or Sign up with social platforms</p>
         <div class="social-media">
           <a href="#" class="social-icon">
@@ -134,9 +127,6 @@
           <a href="#" class="social-icon">
             <i class="fab fa-linkedin-in"></i>
           </a>
-        </div>
-        <div style="width: 70%;height:40%; font-size: 24px;">
-            {{registerform.errors}}
         </div>
       </div>
     </div>

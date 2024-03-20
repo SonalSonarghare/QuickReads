@@ -9,22 +9,21 @@
     ></script>
     <link rel="stylesheet" href="/static/css/index.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <title>Sign in Form</title>
+    <title>QuickReads|Sign In Form</title>
   </head>
   <body>
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form method="POST" autocomplete="off">
-            {% csrf_token %}
+          <form action="#" class="sign-in-form">
             <h2 class="title">SIGN IN</h2>
             <div class="input-field">
-                <i class="fas fa-user"></i>
-<                {{ loginform.username }}
->            </div>
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Username" />
+            </div>
             <div class="input-field">
-                <i class="fas fa-lock"></i>
-                {{loginform.password}}
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" />
             </div>
             <input type="submit" value="Login" class="btn solid" />
             <p class="social-text">Or Sign in with social platforms</p>
@@ -41,9 +40,6 @@
                 <a href="#" class="social-icon">
                     <i class="fab fa-linkedin-in"></i>
                 </a>
-            </div>
-            <div style="width: 70%;height:40%; font-size: 24px;">
-                {{ loginform.errors }}
             </div>
         </form>
           <form action="#" class="sign-up-form">

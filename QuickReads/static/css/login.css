@@ -137,7 +137,7 @@ form.sign-in-form {
   background-color: #800020;
   border: none;
   outline: none;
-  height: 49px;
+  height: 80px;
   border-radius: 49px;
   color:#F5F5DC;
   text-transform: uppercase;
@@ -264,7 +264,7 @@ form.sign-in-form {
     background-color: transparent;
     border: 2px solid #800020;
     width: 130px;
-    height: 50px;
+    height: 80px;
     font-weight: bold;
     font-size: 1rem;
     color: #800020;
