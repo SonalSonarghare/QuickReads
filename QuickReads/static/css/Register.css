@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body,
+  input {
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .container {
+    position: relative;
+    width: 100%;
+    background-color: #F5F5DC;
+    min-height: 100vh;
+  }
+  
+
+  .signin-signup {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 30%;
+    width: 50%;
+  }
+  
+  form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0rem 5rem;
+  }
+  
+  .title {
+    font-size: 2.2rem;
+    color: #800020;
+    margin-bottom: 10px;
+  }
+  
+  .input-field {
+    max-width: 380px;
+    width: 100%;
+    background-color: #444;
+    margin: 10px 0;
+    height: 55px;
+    border-radius: 55px;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+    position: relative;
+  }
+  
+  .input-field i {
+    text-align: center;
+    line-height: 55px;
+    color: #acacac;
+    font-size: 1.1rem;
+  }
+  
+  .input-field input {
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #fff;
+  }
+  
+  .input-field input::placeholder {
+    color: #aaa;
+    font-weight: 500;
+  }
+  
+  .social-text {
+    padding: 0.7rem 0;
+    font-size: 1rem;
+  }
+  
+  .social-media {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .social-icon {
+    height: 46px;
+    width: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0.45rem;
+    color: #333;
+    border-radius: 50%;
+    border: 1px solid #333;
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+  
+  .social-icon:hover {
+    color: #800020;
+    border-color: #800020;
+  }
+  
+  .btn {
+    width: 150px;
+    background-color: #800020;
+    border: none;
+    outline: none;
+    height: 49px;
+    border-radius: 49px;
+    color:#F5F5DC;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    transform: translateX(10px);  
+    background-color: #333;
+    color:#fff;
+  }
+  
+  .image {
+    margin-top:-100px;
+    width:50% ;
+  }
+  

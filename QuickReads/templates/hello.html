@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="/static/css/Register.css" />
+  <title>Sign up Form</title>
+  <style>
+    /* Add styles for the image and circle */
+    .image-container {
+        position: relative; /* Change position to relative */
+     /* Increase z-index to ensure it's on top of the circle */
+      }
+      
+      .circle {
+        position: fixed;
+        top: 5%;
+        left: calc(100% - 120px);
+        transform: translate(-50%, -50%);
+        width: 1800px;
+        height: 1800px;
+        background-image: linear-gradient(to bottom, #800020, #800020);
+        border-radius: 50%;
+      /* Decrease z-index to place it below the image */
+      }
+
+    .image {
+        width: 50%; /* Decrease the width to 70% of its container */
+        height: auto; /* Maintain aspect ratio */
+        margin-left:50%;
+        margin-top:8%
+    }
+    .content {
+        position: absolute;
+        top: 20%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+        z-index: 2; /* Ensure it's on top of the circle */
+      }
+  
+      .icon-text-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start; /* Align icons to the left */
+        margin-bottom: 20px;
+      }
+      
+      .icon-text-container i {
+        margin-right: 20px;
+        margin-left: 0; /* Remove right margin and add left margin */
+      }
+  
+      .btn.transparent {
+        color: white;
+        border: 2px solid white;
+        background-color: transparent;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        cursor: pointer;
+    }
+    .btn.transparent:hover {
+        color: #800020; /* Change color to desired color on hover */
+        background-color: white; /* Change background color to desired color on hover */
+      }
+
+  </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Circle -->
+        <div class="circle"></div>
+        <!-- Content -->
+        <div class="content">
+          <h1>One of us ?</h1>
+          <div class="icon-text-container">
+            <i class="fa-solid fa-user-plus fa-4xl"></i>
+            <h1>Follow Topics</h1>
+          </div>
+          <div class="icon-text-container">
+            <i class="fa-brands fa-wpexplorer fa-xl"></i>
+            <h1>Explore</h1>
+          </div>
+          <div class="icon-text-container">
+            <i class="fa-solid fa-arrow-up-from-bracket fa-xl"></i>
+            <h1>Share Ideas</h1>
+          </div>
+          <button class="btn transparent" id="sign-in-btn">Sign in</button>
+        </div>
+        <!-- Image Container -->
+        <div class="image-container">
+          <img src="/static/img/reg(1).svg" class="image" alt="" />
+        </div>
+        <!-- Forms Container -->
+        <div class="forms-container">
+          <div class="signin-signup">
+            <form action="#" class="sign-up-form">
+              <h2 class="title">SIGN UP</h2>
+              <div class="input-field">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Username" />
+              </div>
+              <div class="input-field">
+                <i class="fas fa-envelope"></i>
+                <input type="email" placeholder="Email" />
+              </div>
+              <div class="input-field">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Password" />
+              </div>
+              <div class="input-field">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Re-Enter Password" />
+              </div>
+              <input type="submit" class="btn" value="Sign up" />
+              <p class="social-text">Or Sign up with social platforms</p>
+              <div class="social-media">
+                <a href="#" class="social-icon">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="#" class="social-icon">
+                  <i class="fab fa-google"></i>
+                </a>
+                <a href="#" class="social-icon">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </body>
+    <script>
+        document.getElementById("sign-in-btn").addEventListener("click", function() {
+          window.location.href = "/Login";
+        });
+      </script>
+    </html>
