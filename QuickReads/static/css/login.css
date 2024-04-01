@@ -14,7 +14,7 @@ input {
 .container {
   position: relative;
   width: 100%;
-  background-color: #F5F5DC;
+  background-color: #fff;
   min-height: 100vh;
   overflow: hidden;
 }
@@ -139,7 +139,7 @@ form.sign-in-form {
   outline: none;
   height: 80px;
   border-radius: 49px;
-  color:#F5F5DC;
+  color:#fff;
   text-transform: uppercase;
   font-weight: 600;
   margin: 10px 0;
@@ -215,7 +215,7 @@ form.sign-in-form {
 }
 .panel .content {
 
-  color: #F5F5DC;
+  color: #fff;
   transition: transform 0.9s ease-in-out;
   transition-delay: 0.6s;
 }
@@ -244,7 +244,7 @@ form.sign-in-form {
 .btn.transparent {
   margin-bottom: 20px;
   background: none;
-  border: 2px solid #F5F5DC;
+  border: 2px solid #fff;
   width: 130px;
   height: 50px;
   font-weight: bold;
@@ -253,7 +253,7 @@ form.sign-in-form {
 
 .btn.transparent:hover {
   transform: translateX(10px);
-  background-color: #F5F5DC; /* Change button background color to white on hover */
+  background-color: #fff; /* Change button background color to white on hover */
   color: #800020; /* Change button text color to red on hover */
 }
 .right-panel .image,
@@ -273,7 +273,7 @@ form.sign-in-form {
   #sign-up-btn:hover {
     transform: translateX(10px);
     background-color: #800020;
-    color: #F5F5DC;
+    color: #fffC;
   }
 
 /* ANIMATION */
@@ -381,7 +381,7 @@ form.sign-in-form {
   }
   .btn.transparent:hover {
     transform: translateX(10px);
-    background-color: #F5F5DC; /* Change button background color to white on hover */
+    background-color: #fff; /* Change button background color to white on hover */
     color: #800020; /* Change button text color to red on hover */
   }
 
@@ -447,4 +447,26 @@ form.sign-in-form {
     bottom: 28%;
     left: 50%;
   }
+}
+
+/* CSS for the modal */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
 }

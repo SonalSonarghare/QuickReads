@@ -98,21 +98,27 @@
     <!-- Forms Container -->
     <div class="forms-container">
       <div class="signin-signup">
+        <form method="POST" action="">
+          {% csrf_token %}
             <h2 class="title">SIGN UP</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
+              {{form.username}}
             </div>
             <div class="input-field">
               <i class="fas fa-envelope"></i>
-              <input type="email" placeholder="Email" />
+              {{form.email}}
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
+              {{form.password1}}
             </div>
+            <div class="input-field">
+                <i class="fas fa-lock"></i>
+                {{form.password2}}
+              </div>
             <input type="submit" class="btn" value="Sign up" />
-
+            {{form.errors}}
         <p class="social-text">Or Sign up with social platforms</p>
         <div class="social-media">
           <a href="#" class="social-icon">
@@ -133,8 +139,25 @@
   </div>
 </body>
 <script>
-  document.getElementById("sign-in-btn").addEventListener("click", function() {
-    window.location.href = "/Login";
-  });
-</script>
+    // Correcting the typo and selecting all input elements
+    var form_fields = document.getElementsByTagName('input');
+  
+    // Assigning placeholders to respective fields
+    form_fields[1].placeholder = 'Username...';
+    form_fields[2].placeholder = 'Email...';
+    form_fields[3].placeholder = 'Enter Password...';
+    form_fields[4].placeholder = 'Re-enter Password...';
+  
+    // Adding a class to each form field
+    for (var i = 0; i < form_fields.length; i++) {
+      form_fields[i].classList.add('form-control');
+    }
+  
+    // Event listener for sign-in button
+    document.getElementById("sign-in-btn").addEventListener("click", function() {
+      window.location.href = "/Login";
+    });
+  </script>
+
 </html>
+
