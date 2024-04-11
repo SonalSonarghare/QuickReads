@@ -185,7 +185,7 @@ nav a:hover {
 .box {
   position: relative; /* Set position to relative for positioning the circle-logo */
   width: 350px; /* Set the width of individual boxes */
-  height: 480px;
+  height: 550px;
   padding: 90px; /* Adjust padding to reduce box height */
   margin: 20px; /* Add margin to create space between boxes */
   background-color: #fff; /* Background color of boxes */
@@ -221,7 +221,7 @@ nav a:hover {
 .date
 {
   margin-top:10px;
-  margin-left:-340px;
+  margin-left:-310px;
 }
 .title
 {
@@ -249,6 +249,8 @@ nav a:hover {
   color:#333;
   font-family: 'Times New Roman', Times, serif; /* Times New Roman font */
 }
+
+
 .userdata i
 {
   margin-top: 30px;
@@ -390,7 +392,7 @@ nav a:hover {
 .back {
   background-color: #fff;
   width: 500px; /* Adjust width */
-  height: 550px; /* Adjust height */
+  height: 600px; /* Adjust height */
   margin-top: -25px;
   margin-left: -80px;
   display: none; /* Initially hide the back content */
@@ -566,3 +568,4 @@ footer h1 {
 .sources ul li:nth-child(9) {
   line-height: 150px; /* Adjust line-height to move the image down */
 }
+

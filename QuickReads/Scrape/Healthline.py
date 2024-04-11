@@ -27,13 +27,13 @@ with open('healthline_articles.csv', 'w', newline='', encoding='utf-8-sig') as c
     writer = csv.writer(csvfile)
     
     # Write header row
-    writer.writerow(['Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
+    writer.writerow(['Article_ID','Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
     
     # Find all articles on the page
     articles = driver.find_elements(By.CSS_SELECTOR, ".css-18vzruc")
-    
+    article_id = 99  # Initialize article ID counter
     # Iterate over each article
-    for i in range(min(10, len(articles))):
+    for i in range(min(12, len(articles))):
         articles = driver.find_elements(By.CSS_SELECTOR, ".css-18vzruc")
         article = articles[i]  # Get current article
         
@@ -64,7 +64,7 @@ with open('healthline_articles.csv', 'w', newline='', encoding='utf-8-sig') as c
         
         # Extract summary
         summary = article.find_element(By.CSS_SELECTOR, ".css-2fdibo").text.strip()  
-        
+        article_id += 1 
         # Extract content from the article page
         link = article.find_element(By.LINK_TEXT, "READ MORE")
         link.click()
@@ -83,7 +83,7 @@ with open('healthline_articles.csv', 'w', newline='', encoding='utf-8-sig') as c
         combined_text = ' '.join(extracted_li + extracted_texts)
         
         # Write data to CSV
-        writer.writerow([title, title_link, image_url, date, summary, combined_text])
+        writer.writerow([article_id,title, title_link, image_url, date, summary, combined_text])
         
         # Navigate back to the news page and re-find the articles
         driver.execute_script("window.history.go(-1)")

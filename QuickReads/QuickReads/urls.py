@@ -24,8 +24,12 @@ urlpatterns = [
     path('index/', views.Index),
     path('Home/', views.Home, name='Home'),
     path('Health/',views.Health),
+    path('Technology/',views.Technology),
+    path('Education/',views.Education),
+    path('Movies/',views.Movies),
     path('Login/',views.Login,name='Login'),
     path('Register/',views.Register,name='Register'),
     path('Logout/',views.logoutUser,name='Logout'),
+    path('try/',views.Try,name='try'),
 
 ]

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickReads | Your Daily Article Dose</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link rel="stylesheet" href="/static/css/Health.css">
+  <style>
+    /* Your CSS styles here */
+    /* Button styling */
+    .toggle-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 15px;
+      border-radius: 50%;
+      background-color:#440100;
+      color: white; font-weight: bold;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .toggle-button:hover {
+        background-color: #fff;
+        color: #440100;
+        font-weight: bold;
+        transform: scale(1.1);
+      }
+    /* Dialog box styling */
+    .dialog-box {
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+      display: none;
+      max-width: 300px; /* Adjust as needed */
+      z-index: 1000; /* Ensure dialog is on top of other elements */
+    }
+    /* Overlay styling */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 999; /* Ensure overlay is below dialog */
+    }
+  </style>
+</head>
+<body>
+  <!-- Button to toggle dialog box -->
+  <button class="toggle-button" onclick="toggleDialog()">
+    <i class="fas fa-book"></i> Open Dictionary
+  </button>
+  
+
+  <!-- Dialog box -->
+  <div class="dialog-box" id="dialogBox">
+    <div class="container">
+       
+        <div class="search-form">
+           <input type='text' placeholder='Type any word'>
+           <button onclick="fetchandCreateCard()">Search</button>
+        </div>
+
+        <div class="dictionary-app">
+              <!-- Content will be inserted here dynamically -->
+        </div>
+
+    </div>
+    <button onclick="closeDialog()">Close</button>
+  </div>
+
+  <!-- Overlay to darken background when dialog is open -->
+  <div class="overlay" onclick="closeDialog()"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="#" class="logo">
+        <img src="/static/img/logo_q.png" alt="QuickReads Logo">
+      </a>
+      <h1>QUICKREADS</h1>
+      <nav>
+        <ul>
+          <li><a href="#"><i class="fas fa-search"></i> Search</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#"><i class="fas fa-plus"></i> Follow</a></li>
+          <li><a href="#"><i class="far fa-bell"></i></a></li>
+          <!-- Dropdown Menu for User -->
+          <li class="dropdown">
+            <a href="#" class="dropbtn"><i class="far fa-user"></i></a>
+            <div class="dropdown-content">
+              <span class="welcome-text">{{ request.user }}</span>
+              <a href="#"><i class="fas fa-user"></i>    Profile</a>
+              <a href="#"><i class="fas fa-bookmark"></i> Saved</a>
+              <a href="#"><i class="fas fa-chart-line"></i> Analytics</a>
+              <a href="#"><i class="fas fa-cog"></i> Settings</a>
+              <a href="{% url 'Logout' %}"><i class="fas fa-arrow-right"></i> Logout</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>#HEALTH</h1>
+      <p>Get the latest articles and news about Health on QuickReads.<br>
+         Discover our growing collection of curated stories on Health.</p>
+    </div>
+    <div class="foryou">
+      <h1>FOR YOU <a href="#"><i class="fas fa-sliders" style="color: #333;"></i></a></h1>
+      <p>The best of everything you follow</p>
+    </div>
+  </section>
+
+  <!-- Topics Section -->
+  <section class="Topics" id="Topics">
+    <div class="box-container">
+      <!-- Add flip-container boxes here -->
+      <div class="flip-container box" onclick="flipCard(this, event)">
+        <!-- Box content -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <h1>&copy; QuickReads 2024</h1>
+      <div class="sources">
+        <h1>Sources:</h1>
+        <ul>
+          <li><a href="https://www.healthline.com/" target="_blank"><img src="/static/img/1.png" alt="Healthline"></a></li>
+          <li><a href="https://www.bbc.com/news" target="_blank" ><img src="/static/img/2.png" alt="BBC News"></a></li>
+          <li><a href="https://www.edutopia.org/" target="_blank"><img src="/static/img/3.png" alt="Edutopia"></a></li>
+          <li><a href="https://www.ndtv.com/" target="_blank"><img src="/static/img/4.png" alt="NDTV"></a></li>
+          <li><a href="https://www.empireonline.com/" target="_blank"><img src="/static/img/5.png" alt="Empire"></a></li>
+          <li><a href="https://www.wionews.com/sports/" target="_blank"><img src="/static/img/6.png" alt="WION"></a></li>
+          <li><a href="https://www.lonelyplanet.com/" target="_blank"><img src="/static/img/7.png" alt="LonelyPlanet"></a></li>
+          <li><a href="https://phys.org/earth-news/" target="_blank"><img src="/static/img/8.png" alt="PhysOrg"></a></li>
+          <li><a href="https://www.forbes.com/?sh=3c2cd5ad2254" target="_blank"><img src="/static/img/9.png" alt="Forbes"></a></li>
+          <!-- Add more sources as needed -->
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript to handle opening and closing dialog box -->
+  <script>
+    function toggleDialog() {
+      var dialogBox = document.getElementById("dialogBox");
+      var overlay = document.querySelector(".overlay");
+      if (dialogBox.style.display === "none" || dialogBox.style.display === "") {
+        dialogBox.style.display = "block";
+        overlay.style.display = "block";
+        // Set focus to the first interactive element in the dialog box
+        dialogBox.querySelector("input").focus();
+      } else {
+        closeDialog();
+      }
+    }
+
+    function closeDialog() {
+      var dialogBox = document.getElementById("dialogBox");
+      var overlay = document.querySelector(".overlay");
+      dialogBox.style.display = "none";
+      overlay.style.display = "none";
+    }
+
+    async function fetchandCreateCard() {
+      const input = document.querySelector('input');
+      const dictionaryArea = document.querySelector('.dictionary-app');
+      const word = input.value;
+
+      try {
+        const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+        const data = await res.json();
+
+        let partOfSpeechArray = [];
+        for (let i = 0; i < data[0].meanings.length; i++) {
+          partOfSpeechArray.push(data[0].meanings[i].partOfSpeech);
+        }
+
+        dictionaryArea.innerHTML = `
+          <div class="card">
+            <div class="property">
+              <span>Word:</span>
+              <span>${data[0].word}</span>
+            </div>
+
+            <div class="property">
+              <span>Phonetics:</span>
+              <span>${data[0].phonetic}</span>
+            </div>
+
+            <div class="property">
+              <span>
+                <audio controls src="${data[0].phonetics[0].audio}"></audio>
+              </span>
+            </div>
+
+            <div class="property">
+              <span>Definition</span>
+              <span>${data[0].meanings[0].definitions[0].definition}</span>
+            </div>
+
+            <div class="property">
+              <span>${partOfSpeechArray.join(', ')}</span>
+            </div>
+          </div>
+        `;
+      } catch (error) {
+        console.error("Error fetching dictionary content:", error);
+      }
+    }
+  </script>
+</body>
+</html>

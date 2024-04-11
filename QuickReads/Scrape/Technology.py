@@ -27,13 +27,13 @@ with open('Technology_articles.csv', 'w', newline='', encoding='utf-8-sig') as c
     writer = csv.writer(csvfile)
     
     # Write header row
-    writer.writerow(['Title', 'Title_link', 'Image', 'Date', 'Summary','Content'])
+    writer.writerow(['Article_ID','Title', 'Title_link', 'Image', 'Date', 'Summary','Content'])
     
     # Find all articles on the page
     articles = driver.find_elements(By.CSS_SELECTOR, '[data-testid="liverpool-card"]')
-    
+    article_id = 199
     # Iterate over each article
-    for i in range(min(10, len(articles))):
+    for i in range(min(13, len(articles))):
         articles = driver.find_elements(By.CSS_SELECTOR, '[data-testid="liverpool-card"]')
         article = articles[i]  # Get current article
         
@@ -46,10 +46,10 @@ with open('Technology_articles.csv', 'w', newline='', encoding='utf-8-sig') as c
         driver.execute_script("arguments[0].scrollIntoView();",article)
         
         # Wait for images within the current article to load
-        wait.until(EC.presence_of_all_elements_located((By.TAG_NAME, "img")))
+        wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".sc-a898728c-1.jWZsJP")))
         
         # Extract images within the current article
-        image_div=article.find_element(By.CSS_SELECTOR, '[data-testid="card-media"]')
+        image_div=article.find_element(By.CSS_SELECTOR, ".sc-a898728c-1.jWZsJP")
         images = image_div.find_elements(By.TAG_NAME, "img")  
         image_urls = [img.get_attribute("src") for img in images]  
         # Remove brackets from image URL if available
@@ -63,6 +63,8 @@ with open('Technology_articles.csv', 'w', newline='', encoding='utf-8-sig') as c
         
         # Extract summary
         summary = article.find_element(By.CSS_SELECTOR, '[data-testid="card-description"]').text
+        
+        article_id += 1 
         driver.get(title_link)   # Navigate to the next page
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "sc-e1853509-0.bmLndb")))
         
@@ -74,7 +76,7 @@ with open('Technology_articles.csv', 'w', newline='', encoding='utf-8-sig') as c
         combined_text = ' '.join(extracted_texts)
         
         # Write data to CSV
-        writer.writerow([title,title_link,image_url,date,summary,combined_text])
+        writer.writerow([article_id,title,title_link,image_url,date,summary,combined_text])
         driver.execute_script("window.history.go(-1)")
         wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, '[data-testid="liverpool-card"]')))
         #articles = driver.find_elements(By.CSS_SELECTOR, ".css-18vzruc")

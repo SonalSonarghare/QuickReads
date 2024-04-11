@@ -9,71 +9,71 @@
   <link rel="stylesheet" href="/static/css/Health.css">
   
   <style>
-     /* Your CSS styles here */
-    /* Button styling */
-    .toggle-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      padding: 15px;
-      border-radius: 50%;
-      background-color:#440100;
-      color: white; font-weight: bold;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-      transition: background-color 0.3s, transform 0.3s;
-    }
-    .toggle-button:hover {
-        background-color: #fff;
-        color: #440100;
-        font-weight: bold;
-        transform: scale(1.1);
-      }
-    /* Dialog box styling */
-    .dialog-box button {
-      background-color: #440100;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      margin-top: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    
-    .dialog-box button:hover {
-      background-color: #6e0e0a;
-    }
-    .dialog-box {
-      position: fixed;
-      bottom: 70px;
-      right: 20px;
-      background-color: white;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-      display: none;
-      max-width: 300px; /* Adjust as needed */
-      z-index: 1000; /* Ensure dialog is on top of other elements */
-    }
-    /* Overlay styling */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: none;
-      z-index: 999; /* Ensure overlay is below dialog */
-    }
- 
-    .search-form input[type='text'] {
-      width:150px;
-      height: 30px; /* Adjust the height as needed */
-    }
-  </style>
+    /* Your CSS styles here */
+   /* Button styling */
+   .toggle-button {
+     position: fixed;
+     bottom: 20px;
+     right: 20px;
+     padding: 15px;
+     border-radius: 50%;
+     background-color:#440100;
+     color: white; font-weight: bold;
+     border: none;
+     cursor: pointer;
+     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+     transition: background-color 0.3s, transform 0.3s;
+   }
+   .toggle-button:hover {
+       background-color: #fff;
+       color: #440100;
+       font-weight: bold;
+       transform: scale(1.1);
+     }
+   /* Dialog box styling */
+   .dialog-box button {
+     background-color: #440100;
+     color: white;
+     border: none;
+     padding: 10px 20px;
+     border-radius: 5px;
+     margin-top: 10px;
+     cursor: pointer;
+     transition: background-color 0.3s;
+   }
+   
+   .dialog-box button:hover {
+     background-color: #6e0e0a;
+   }
+   .dialog-box {
+     position: fixed;
+     bottom: 70px;
+     right: 20px;
+     background-color: white;
+     padding: 20px;
+     border-radius: 5px;
+     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+     display: none;
+     max-width: 300px; /* Adjust as needed */
+     z-index: 1000; /* Ensure dialog is on top of other elements */
+   }
+   /* Overlay styling */
+   .overlay {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.5);
+     display: none;
+     z-index: 999; /* Ensure overlay is below dialog */
+   }
+
+   .search-form input[type='text'] {
+     width:150px;
+     height: 30px; /* Adjust the height as needed */
+   }
+ </style>
 </head>
 <body>
   <!-- Button to toggle dialog box -->
@@ -133,9 +133,9 @@
 
   <section class="hero">
     <div class="container">
-      <h1>#HEALTH</h1>
-      <p>Get the latest articles and news about Health on QuickReads.<br>
-         Discover our growing collection of curated stories on Health.</p>
+      <h1>#TECHNOLOGY</h1>
+      <p>Get the latest articles and news about Technology on QuickReads.<br>
+         Discover our growing collection of curated stories on Technology.</p>
     </div>
     <div class="foryou">
       <h1>FOR YOU <a href="#"><i class="fa-solid fa-sliders" style="color: #333;"></i></a></h1>
@@ -151,14 +151,14 @@
           <div class="front">
              <!-- Front side content -->
             <div class="circle-logo">
-              <a href="https://www.healthline.com/" target="_blank">
-                <img src="/static/img/Topics/1.png" alt="Healthline">
-                <h1>Healthline</h1>
+              <a href="https://www.bbc.com/news" target="_blank">
+                <img src="/static/img/Topics/2.png" alt="BBC News">
+                <h1 style="margin-right:-20px ">BBC News</h1>
               </a>
             </div>
             <div class="photo">
               <a href="{{ article.Title_link}}" target="_blank">
-                <img src="{{ article.Image}}" alt="Article Image">
+                <img src="{{ article.Image}}" alt="Article Image"style="width: 400px; height: 300px;">
               </a>
             </div>
             <div class="date">
