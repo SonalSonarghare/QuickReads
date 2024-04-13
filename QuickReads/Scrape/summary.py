@@ -102,7 +102,9 @@ def process_csv(input_csv_filename):
     os.replace('temp.csv', input_csv_filename)
 
 # Input CSV file names
-input_csv_filenames = ['healthline_articles.csv', 'Technology_articles.csv','Education_articles.csv']
+input_csv_filenames = ['healthline_articles.csv', 'Technology_articles.csv','Education_articles.csv',
+                       'Politics_articles.csv','Business_articles.csv','Movies_articles.csv','Nature_articles.csv',
+                       'Sports_articles.csv','Travel_articles.csv']
 
 # Process each CSV file
 for filename in input_csv_filenames:

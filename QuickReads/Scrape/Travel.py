@@ -27,13 +27,13 @@ with open('Travel_articles.csv', 'w', newline='', encoding='utf-8-sig') as csvfi
     writer = csv.writer(csvfile)
     
     # Write header row
-    writer.writerow(['Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
-    
+    writer.writerow(['Article_ID','Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
+    article_id =699 
     # Find all articles on the page
     articles = driver.find_elements(By.TAG_NAME, 'li')
     
     # Iterate over each article
-    for i in range(min(10, len(articles))):
+    for i in range(min(12, len(articles))):
         articles = driver.find_elements(By.TAG_NAME, 'li')
         article = articles[i]  # Get current article
         
@@ -65,6 +65,7 @@ with open('Travel_articles.csv', 'w', newline='', encoding='utf-8-sig') as csvfi
         # Extract summary
         summary = article.find_element(By.CSS_SELECTOR, 'p.line-clamp-2').text
         
+        article_id += 1 
         # Navigate to the next page
         driver.get(title_link)   
         
@@ -76,7 +77,7 @@ with open('Travel_articles.csv', 'w', newline='', encoding='utf-8-sig') as csvfi
         extracted_texts = [content_element.text for content_element in content_elements]
         combined_text = ' '.join(extracted_texts)
         
-        writer.writerow([title, title_link, image_url, date, summary, combined_text])
+        writer.writerow([article_id,title, title_link, image_url, date, summary, combined_text])
         
         # Go back to the articles page
         driver.execute_script("window.history.go(-1)")

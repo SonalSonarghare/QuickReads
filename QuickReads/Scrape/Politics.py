@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from urllib.parse import urlparse
 import csv
 
 chrome_options = webdriver.ChromeOptions()
@@ -15,66 +16,76 @@ chrome_options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome(options=chrome_options)
 
 # Navigate to the Healthline news page
-driver.get("https://www.ndtv.com/topic/politics")
+driver.get("https://indianexpress.com/section/political-pulse/")
 
 # Wait for articles to load (if necessary)
 wait = WebDriverWait(driver, 10)
-section_element = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".src_lst-li")))
+section_element = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".articles")))
 
 # Open a CSV file for writing
-with open('politics_articles.csv', 'w', newline='', encoding='utf-8-sig') as csvfile:
+with open('Politics_articles.csv', 'w', newline='', encoding='utf-8-sig') as csvfile:
     # Define CSV writer
     writer = csv.writer(csvfile)
-    
+
     # Write header row
-    writer.writerow(['Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
-    
+    writer.writerow(['Article_ID','Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
+    article_id =499  
     # Find all articles on the page
-    articles = driver.find_elements(By.CSS_SELECTOR, ".src_lst-li")
-    
+    articles = driver.find_elements(By.CSS_SELECTOR, ".articles")
+
     # Iterate over each article
-    for i in range(min(2, len(articles))):
-        articles = driver.find_elements(By.CSS_SELECTOR, ".src_lst-li")
+    for i in range(min(12, len(articles))):
+        articles = driver.find_elements(By.CSS_SELECTOR, ".articles ")
         article = articles[i]  # Get current article
-        
+
         # Extract title
-        title = article.find_element(By.CSS_SELECTOR, ".src_itm-ttl").text
-        
+        title = article.find_element(By.CSS_SELECTOR, ".title").text
+
         # Extract title link
         title_link= article.find_element(By.CSS_SELECTOR, "a").get_attribute("href")
         # Scroll into view to ensure all images load
         driver.execute_script("arguments[0].scrollIntoView();",article)
-        
+
         # Wait for images within the current article to load
         wait.until(EC.presence_of_all_elements_located((By.TAG_NAME, "img")))
-        
+
         # Extract images within the current article
-        image_div=article.find_element(By.CSS_SELECTOR, ".src_lst-lhs")
-        images = image_div.find_elements(By.TAG_NAME, "img")  
-        image_urls = [img.get_attribute("src") for img in images]  
+        image_div=article.find_element(By.CSS_SELECTOR, ".snaps")
+        images = image_div.find_elements(By.TAG_NAME, "img")
+        image_urls = [img.get_attribute("src") for img in images]
         # Remove brackets from image URL if available
         if image_urls:
             image_url = image_urls[0].strip("[]")
         else:
             image_url = "No image found"
-        
+
+
         # Extract date
-        date = article.find_element(By.CSS_SELECTOR, ".src_itm-stx").text
-        
+        date_element = article.find_element(By.CSS_SELECTOR, ".date").text
+        date_parts = date_element.split()
+        month = date_parts[0]  # Extract month
+        day = date_parts[1].strip(',')  # Extract day
+        year = date_parts[2]  # Extract year
+        date = f"{month} {day}, {year}"
+
         # Extract summary
-        summary = article.find_element(By.CSS_SELECTOR, ".src_itm-txt").text
-        driver.get(title_link)   # Navigate to the next page
+        summary = article.find_element(By.CSS_SELECTOR, "p").text
+        driver.get(title_link)  
+        
+        article_id += 1 
+        # Navigate to the next page
         # Wait for the "READ MORE" link to be clickable
-        wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".content")))
+        wait.until(EC.presence_of_element_located((By.TAG_NAME, "p")))
 
         # Extract text from paragraph elements within the article body
-        p_elements = driver.find_elements(By.CSS_SELECTOR, ".sp-cn.ins_storybody")
+        p_elements = driver.find_elements(By.TAG_NAME, "p")
         extracted_texts = [p_element.text for p_element in p_elements]
-        
+        combined_text = ' '.join( extracted_texts)
+
         # Write data to CSV
-        writer.writerow([title,title_link,image_url,date,summary,extracted_texts])
+        writer.writerow([article_id,title,title_link,image_url,date,summary,combined_text])
         driver.execute_script("window.history.go(-1)")
-        wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".src_lst-li")))
+        wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".articles")))
         #articles = driver.find_elements(By.CSS_SELECTOR, ".css-18vzruc")
 
 # Close the WebDriver
