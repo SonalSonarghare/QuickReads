@@ -1,2 +1,9 @@
-*.css linguist-detectable=false  
-*.html linguist-detectable=false  
+#*.css linguist-detectable=false  
+#*.html linguist-detectable=false  
+QuickReads/templates/Nature.html linguist-detectable=false
+QuickReads/templates/Health.html linguist-detectable=false
+QuickReads/templates/Movies.html linguist-detectable=false
+QuickReads/templates/Travel.html linguist-detectable=false
+QuickReads/templates/Politics.html linguist-detectable=false
+QuickReads/templates/Education.html linguist-detectable=false
+QuickReads/static/css/style.css linguist-detectable=false
