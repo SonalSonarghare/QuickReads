@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/30846f7280.js" crossorigin="anonymous"></script>
   <title>QuickReads | Your Daily Article Dose</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <link rel="stylesheet" href="/static/css/Health.css">
@@ -176,7 +176,7 @@
               <i class="fa-regular fa-heart" onclick="toggleHeart(this)"></i><span class="heart-count"> 0</span> 
               <i class="fa-regular fa-comment-dots"></i> <span class="comment-count">0</span>
               <i class="fa-regular fa-bookmark"></i>
-              <i class="fa-solid fa-arrow-up-from-bracket"></i>
+              <i class="fa-solid fa-arrow-up-from-bracket"onclick="shareArticle('{{article.Title_link}}', '{{article.Title}}')"></i>
             </div>
             <div class="comment-box" style="display: none;">
               <textarea placeholder="Write your comment here..."></textarea>
@@ -226,73 +226,6 @@
 
 <script src="/static/js/health.js">
 </script>
-<script>
-  function toggleDialog() {
-    var dialogBox = document.getElementById("dialogBox");
-    var overlay = document.querySelector(".overlay");
-    if (dialogBox.style.display === "none" || dialogBox.style.display === "") {
-      dialogBox.style.display = "block";
-      overlay.style.display = "block";
-      // Set focus to the first interactive element in the dialog box
-      dialogBox.querySelector("input").focus();
-    } else {
-      closeDialog();
-    }
-  }
 
-  function closeDialog() {
-    var dialogBox = document.getElementById("dialogBox");
-    var overlay = document.querySelector(".overlay");
-    dialogBox.style.display = "none";
-    overlay.style.display = "none";
-  }
-
-  async function fetchandCreateCard() {
-    const input = document.querySelector('input');
-    const dictionaryArea = document.querySelector('.dictionary-app');
-    const word = input.value;
-
-    try {
-      const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-      const data = await res.json();
-
-      let partOfSpeechArray = [];
-      for (let i = 0; i < data[0].meanings.length; i++) {
-        partOfSpeechArray.push(data[0].meanings[i].partOfSpeech);
-      }
-
-      dictionaryArea.innerHTML = `
-        <div class="card">
-          <div class="property">
-            <span>Word:</span>
-            <span>${data[0].word}</span>
-          </div>
-
-          <div class="property">
-            <span>Phonetics:</span>
-            <span>${data[0].phonetic}</span>
-          </div>
-
-          <div class="property">
-            <span>
-              <audio controls src="${data[0].phonetics[0].audio}" volume="10.0"></audio>
-            </span>
-          </div>
-
-          <div class="property">
-            <span>Definition</span>
-            <span>${data[0].meanings[0].definitions[0].definition}</span>
-          </div>
-
-          <div class="property">
-            <span>${partOfSpeechArray.join(', ')}</span>
-          </div>
-        </div>
-      `;
-    } catch (error) {
-      console.error("Error fetching dictionary content:", error);
-    }
-  }
-</script>
 </body>
 </html>
