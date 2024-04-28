@@ -15,27 +15,33 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from QuickReads import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.Index),  # Define the root URL pattern
     path('index/', views.Index),
     path('Home/', views.Home, name='Home'),
-    path('Health/',views.Health),
-    path('Technology/',views.Technology),
-    path('Education/',views.Education),
+    path('Health/',views.Health,name='Health'),
+    path('Technology/',views.Technology,name='Technology'),
+    path('Education/',views.Education,name='Education'),
     path('Movies/',views.Movies),
     path('Politics/',views.Politics),
     path('Nature/',views.Nature),
     path('Travel/',views.Travel),
-    path('Sports/',views.Sports),
-    path('Business/',views.Business),
+    path('Sports/',views.Sports,name='Sports'),
+    path('Business/',views.Business,name='Business'),
     path('Hybrid/',views.Hybrid),
     path('Login/',views.Login,name='Login'),
     path('Register/',views.Register,name='Register'),
     path('Logout/',views.logoutUser,name='Logout'),
-    path('try/',views.Try,name='try'),
-
+    path('saved/',views.saved,name='saved'),
+    path('add_bookmark/<str:pk>/', views.add_bookmark, name='add_bookmark'),
+    path('remove_bookmark/<str:pk>/', views.remove_bookmark, name='remove_bookmark'),
+    path('csv/', views.csv_forall, name='csv'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

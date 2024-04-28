@@ -221,7 +221,7 @@ nav a:hover {
 .date
 {
   margin-top:10px;
-  margin-left:-310px;
+  margin-left:-270px;
 }
 .title
 {
@@ -230,6 +230,7 @@ nav a:hover {
   font-size:25px;
   text-align: left;
   font-family: 'Times New Roman', Times, serif; /* Times New Roman font */
+  font-weight: 550; /* Less bold */
 }
 .title a {
   color: black; /* Change the color of the link */

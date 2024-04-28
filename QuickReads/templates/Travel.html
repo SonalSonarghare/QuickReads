@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/30846f7280.js" crossorigin="anonymous"></script>
   <title>QuickReads | Your Daily Article Dose</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <link rel="stylesheet" href="/static/css/Health.css">
@@ -142,14 +142,14 @@
       <p>The best of everything you follow</p>
     </div>
   </section>
-
+  
   <section class="Topics" id="Topics">
     <div class="box-container">
       {% for article in articles %}
       <div class="flip-container box" onclick="flipCard(this, event)">
         <div class="flipper">
           <div class="front">
-             <!-- Front side content -->
+            <!-- Front side content -->
             <div class="circle-logo">
               <a href="https://www.lonelyplanet.com/" target="_blank">
                 <img src="/static/img/Topics/7.png" alt="Lonely Planet">
@@ -175,8 +175,8 @@
             <div class="userdata">
               <i class="fa-regular fa-heart" onclick="toggleHeart(this)"></i><span class="heart-count"> 0</span> 
               <i class="fa-regular fa-comment-dots"></i> <span class="comment-count">0</span>
-              <i class="fa-regular fa-bookmark"></i>
-              <i class="fa-solid fa-arrow-up-from-bracket"></i>
+              <a href="{% url 'add_bookmark' article.id %}"><i class="fa-regular fa-bookmark"></i></a>
+              <i class="fa-solid fa-arrow-up-from-bracket"onclick="shareArticle('{{article.Title_link}}', '{{article.Title}}')"></i>
             </div>
             <div class="comment-box" style="display: none;">
               <textarea placeholder="Write your comment here..."></textarea>
@@ -185,22 +185,20 @@
           </div>
           <div class="back">
             <div class="read_aloud">
-                <button class="read-aloud-btn"><i class="fa-solid fa-volume-high"></i></button>
+              <button class="read-aloud-btn"><i class="fa-solid fa-volume-high"></i></button>
             </div>
             <div class="summary">
-                {{article.Field1}}
+              {{article.Field1}}
             </div>
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
-
-      <!-- Add more flip-container boxes here if needed -->
-      
-    </div>
+  
+    <!-- Add more flip-container boxes here if needed -->
   </section>
-</section>
+  
 
 <footer>
   <div class="container">

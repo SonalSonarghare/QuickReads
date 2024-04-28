@@ -27,7 +27,7 @@ with open('Technology_articles.csv', 'w', newline='', encoding='utf-8-sig') as c
     writer = csv.writer(csvfile)
     
     # Write header row
-    writer.writerow(['Article_ID','Title', 'Title_link', 'Image', 'Date', 'Summary','Content'])
+    writer.writerow(['Article_ID','Category','Title', 'Title_link', 'Image', 'Date', 'Summary','Content'])
     
     # Find all articles on the page
     articles = driver.find_elements(By.CSS_SELECTOR, '[data-testid="liverpool-card"]')
@@ -74,9 +74,9 @@ with open('Technology_articles.csv', 'w', newline='', encoding='utf-8-sig') as c
 
         # Combine all extracted text into a single string
         combined_text = ' '.join(extracted_texts)
-        
+        category='Technology'
         # Write data to CSV
-        writer.writerow([article_id,title,title_link,image_url,date,summary,combined_text])
+        writer.writerow([article_id,category,title,title_link,image_url,date,summary,combined_text])
         driver.execute_script("window.history.go(-1)")
         wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, '[data-testid="liverpool-card"]')))
         #articles = driver.find_elements(By.CSS_SELECTOR, ".css-18vzruc")

@@ -27,7 +27,7 @@ with open('Travel_articles.csv', 'w', newline='', encoding='utf-8-sig') as csvfi
     writer = csv.writer(csvfile)
     
     # Write header row
-    writer.writerow(['Article_ID','Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
+    writer.writerow(['Article_ID','Category','Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
     article_id =699 
     # Find all articles on the page
     articles = driver.find_elements(By.TAG_NAME, 'li')
@@ -76,8 +76,8 @@ with open('Travel_articles.csv', 'w', newline='', encoding='utf-8-sig') as csvfi
         content_elements = driver.find_elements(By.CSS_SELECTOR, '.styles_article-body___AqUn p')
         extracted_texts = [content_element.text for content_element in content_elements]
         combined_text = ' '.join(extracted_texts)
-        
-        writer.writerow([article_id,title, title_link, image_url, date, summary, combined_text])
+        category='Travel'
+        writer.writerow([article_id,category,title, title_link, image_url, date, summary, combined_text])
         
         # Go back to the articles page
         driver.execute_script("window.history.go(-1)")

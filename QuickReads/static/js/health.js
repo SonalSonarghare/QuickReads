@@ -1,3 +1,4 @@
+//Like
 function toggleHeart(icon) {
     if (icon.classList.contains('fa-regular')) {
         icon.classList.remove('fa-regular');
@@ -17,7 +18,8 @@ function toggleHeart(icon) {
     // Stop propagation of the click event
     event.stopPropagation();
 }
-  
+
+//Comment
 // Function to toggle the visibility of the comment box
 function toggleCommentBox(card) {
     var commentBox = card.querySelector('.comment-box');
@@ -56,7 +58,7 @@ document.querySelectorAll('.submit-comment').forEach(button => {
     });
 });
   
-
+//Flip
 function flipCard(card, event) {
     // Check if the clicked element is one of the elements that should not trigger the flip
     if (
@@ -73,6 +75,7 @@ function flipCard(card, event) {
     card.classList.toggle('flipped'); // Flip the card otherwise
 }
 
+//ReadAloud
 const readAloudButtonsContainer = document.querySelector('.box-container');
 
 // Initialize speech synthesis utterance
@@ -149,10 +152,7 @@ readAloudButtonsContainer.addEventListener('click', event => {
 
 
 
-
-
-
-
+//Dictionary
 function toggleDialog() {
   var dialogBox = document.getElementById("dialogBox");
   var overlay = document.querySelector(".overlay");
@@ -220,6 +220,7 @@ async function fetchandCreateCard() {
   }
 }
 
+//ShareArticle
 function shareArticle(articleLink, articleTitle) {
   // Construct the share message
   const shareMessage = `Check out this article: ${articleTitle} - ${articleLink}`;
@@ -359,4 +360,43 @@ function shareArticle(articleLink, articleTitle) {
     document.body.removeChild(overlay);
   });
   document.body.appendChild(overlay);
+}
+
+
+//Bookmark
+// Function to toggle bookmark
+function toggleBookmark(event, articleId) {
+  event.preventDefault(); // Prevent default link behavior
+
+  // Send a POST request to your Django view to toggle the bookmark
+  fetch(`/toggle_bookmark/${articleId}/`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken'), // Ensure you have a function to get CSRF token
+      },
+      body: JSON.stringify({ article_id: articleId }),
+  })
+  .then(response => response.json())
+  .then(data => {
+      // Update the bookmark icon based on the response
+      const bookmarkIcon = event.target.querySelector('i');
+      if (data.is_bookmarked) {
+          bookmarkIcon.classList.add('fa-bookmark');
+          bookmarkIcon.classList.remove('fa-bookmark-o');
+          bookmarkIcon.nextSibling.textContent = ' Remove Bookmark';
+      } else {
+          bookmarkIcon.classList.add('fa-bookmark-o');
+          bookmarkIcon.classList.remove('fa-bookmark');
+          bookmarkIcon.nextSibling.textContent = ' Save';
+      }
+  })
+  .catch(error => console.error('Error toggling bookmark:', error));
+}
+
+// Function to get CSRF token from cookies
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
 }

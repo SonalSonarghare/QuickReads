@@ -142,7 +142,7 @@
       <p>The best of everything you follow</p>
     </div>
   </section>
-
+  
   <section class="Topics" id="Topics">
     <div class="box-container">
       {% for article in articles %}
@@ -158,7 +158,7 @@
             </div>
             <div class="photo">
               <a href="{{ article.Title_link}}" target="_blank">
-                <img src="{{ article.Image}}" alt="Article Image"style="width: 400px; height: 300px;">
+                <img src="{{ article.Image}}" alt="Article Image" style="width: 400px; height: 300px;">
               </a>
             </div>
             <div class="date">
@@ -175,8 +175,8 @@
             <div class="userdata">
               <i class="fa-regular fa-heart" onclick="toggleHeart(this)"></i><span class="heart-count"> 0</span> 
               <i class="fa-regular fa-comment-dots"></i> <span class="comment-count">0</span>
-              <i class="fa-regular fa-bookmark"></i>
-              <i class="fa-solid fa-arrow-up-from-bracket"onclick="shareArticle('{{article.Title_link}}', '{{article.Title}}')"></i>
+              <a href="{% url 'add_bookmark' article.id %}"><i class="fa-regular fa-bookmark"></i></a>
+              <i class="fa-solid fa-arrow-up-from-bracket" onclick="shareArticle('{{article.Title_link}}', '{{article.Title}}')"></i>
             </div>
             <div class="comment-box" style="display: none;">
               <textarea placeholder="Write your comment here..."></textarea>
@@ -195,12 +195,12 @@
       </div>
       {% endfor %}
     </div>
-
+  
       <!-- Add more flip-container boxes here if needed -->
       
-    </div>
   </section>
-</section>
+  
+
 
 <footer>
   <div class="container">

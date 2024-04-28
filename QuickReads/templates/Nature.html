@@ -130,7 +130,6 @@
       </nav>
     </div>
   </header>
-
   <section class="hero">
     <div class="container">
       <h1>#NATURE</h1>
@@ -142,14 +141,14 @@
       <p>The best of everything you follow</p>
     </div>
   </section>
-
+  
   <section class="Topics" id="Topics">
     <div class="box-container">
       {% for article in articles %}
       <div class="flip-container box" onclick="flipCard(this, event)">
         <div class="flipper">
           <div class="front">
-             <!-- Front side content -->
+            <!-- Front side content -->
             <div class="circle-logo">
               <a href="https://www.nature.org/en-us/" target="_blank">
                 <img src="/static/img/Topics/6.png" alt="BBC News">
@@ -175,7 +174,7 @@
             <div class="userdata">
               <i class="fa-regular fa-heart" onclick="toggleHeart(this)"></i><span class="heart-count"> 0</span> 
               <i class="fa-regular fa-comment-dots"></i> <span class="comment-count">0</span>
-              <i class="fa-regular fa-bookmark"></i>
+              <a href="{% url 'add_bookmark' article.id %}"><i class="fa-regular fa-bookmark"></i></a>
               <i class="fa-solid fa-arrow-up-from-bracket"onclick="shareArticle('{{article.Title_link}}', '{{article.Title}}')"></i>
             </div>
             <div class="comment-box" style="display: none;">
@@ -195,12 +194,10 @@
       </div>
       {% endfor %}
     </div>
-
-      <!-- Add more flip-container boxes here if needed -->
-      
-    </div>
+  
+    <!-- Add more flip-container boxes here if needed -->
   </section>
-</section>
+  
 
 <footer>
   <div class="container">

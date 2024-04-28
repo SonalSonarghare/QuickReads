@@ -120,7 +120,7 @@
             <div class="dropdown-content">
               <span class="welcome-text">{{ request.user }}</span>
               <a href="#"><i class="fa-solid fa-user"></i>    Profile</a>
-              <a href="#"><i class="fa-solid fa-bookmark"></i> Saved</a>
+              <a href="/saved"><i class="fa-solid fa-bookmark"></i> Saved</a>
               <a href="#"><i class="fa-solid fa-chart-line"></i> Analytics</a>
               <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
               <a href="{% url 'Logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
@@ -130,78 +130,72 @@
       </nav>
     </div>
   </header>
-
   <section class="hero">
     <div class="container">
       <h1>#BUSINESS</h1>
       <p>Get the latest articles and news about Business on QuickReads.<br>
-         Discover our growing collection of curated stories on Business.</p>
+        Discover our growing collection of curated stories on Business.</p>
     </div>
     <div class="foryou">
       <h1>FOR YOU <a href="#"><i class="fa-solid fa-sliders" style="color: #333;"></i></a></h1>
       <p>The best of everything you follow</p>
     </div>
   </section>
-
+  
   <section class="Topics" id="Topics">
     <div class="box-container">
       {% for article in articles %}
       <div class="flip-container box" onclick="flipCard(this, event)">
         <div class="flipper">
           <div class="front">
-             <!-- Front side content -->
+            <!-- Front side content -->
             <div class="circle-logo">
               <a href="https://indianexpress.com/section/business/" target="_blank">
                 <img src="/static/img/Topics/5.png" alt="The Indian Express">
-                <h1 style="margin-right:-120px ">The Indian Express</h1>
+                <h1 style="margin-right:-120px">The Indian Express</h1>
               </a>
             </div>
             <div class="photo">
-              <a href="{{ article.Title_link}}" target="_blank">
-                <img src="{{ article.Image}}" alt="Article Image"style="width: 400px; height: 250px;">
+              <a href="{{ article.Title_link }}" target="_blank">
+                <img src="{{ article.Image }}" alt="Article Image" style="width: 400px; height: 250px;">
               </a>
             </div>
             <div class="date">
-              {{article.Date}}
+              {{ article.Date }}
             </div>
             <div class="title">
-              <a href="{{ article.Title_link}}" target="_blank">
-              {{article.Title}}
+              <a href="{{ article.Title_link }}" target="_blank">
+                {{ article.Title }}
               </a>
             </div>
             <div class="content">
-              {{article.Summary}}
+              {{ article.Summary }}
             </div>
             <div class="userdata">
-              <i class="fa-regular fa-heart" onclick="toggleHeart(this)"></i><span class="heart-count"> 0</span> 
+              <i class="fa-regular fa-heart" onclick="toggleHeart(this)"></i><span class="heart-count"> 0</span>
               <i class="fa-regular fa-comment-dots"></i> <span class="comment-count">0</span>
-              <i class="fa-regular fa-bookmark"></i>
-              <i class="fa-solid fa-arrow-up-from-bracket"onclick="shareArticle('{{article.Title_link}}', '{{article.Title}}')"></i>
+              <a href="{% url 'add_bookmark' article.id %}"><i class="fa-regular fa-bookmark"></i></a>
+              <i class="fa-solid fa-arrow-up-from-bracket" onclick="shareArticle('{{ article.Title_link }}', '{{ article.Title }}')"></i>
             </div>
             <div class="comment-box" style="display: none;">
               <textarea placeholder="Write your comment here..."></textarea>
               <button class="submit-comment">Submit</button>
             </div>
-          
           </div>
           <div class="back">
             <div class="read_aloud">
-                <button class="read-aloud-btn"><i class="fa-solid fa-volume-high"></i></button>
+              <button class="read-aloud-btn"><i class="fa-solid fa-volume-high"></i></button>
             </div>
             <div class="summary">
-                {{article.Field1}}
+              {{ article.Field1 }}
             </div>
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
-
-      <!-- Add more flip-container boxes here if needed -->
-      
-    </div>
   </section>
-</section>
+  
 
 <footer>
   <div class="container">
@@ -223,6 +217,7 @@
     </div>
   </div>
 </footer>
+
 <script src="/static/js/health.js">
 </script>
 </body>

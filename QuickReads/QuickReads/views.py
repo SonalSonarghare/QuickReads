@@ -5,7 +5,9 @@ from .forms import CreateUserForm
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from base.models import Article, Bookmark
 import csv
+
 def Index(request):
     return render(request, "index.html")
 
@@ -49,25 +51,28 @@ def logoutUser(request):
 @login_required(login_url='Login')
 def Home(request):
     return render(request, "home.html")
-
 #HEALTH
 @login_required(login_url='Login')
 def Health(request):
-    articles = []
-    # Specify the full path to the CSV file
-    csv_file_path = r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\healthline_articles.csv'
-    
-    # Read data from CSV file
-    with open(csv_file_path, mode='r', newline='', encoding='utf-8') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            row = {key.strip('\ufeff'): value for key, value in row.items()}
-            articles.append(row)
-    
-    # Print articles for debugging
-    print(articles)
-
+    articles = Article.objects.filter(Category='Health')[:12]
     return render(request, "Health.html", {'articles': articles})
+
+def Try(request):
+    return render(request, "try.html")
+
+#BUISNESS
+@login_required(login_url='Login')
+def Business(request):
+    articles = Article.objects.filter(Category='Business')[:12]
+    return render(request, "Business.html", {'articles': articles})
+def Try(request):
+    return render(request, "try.html")
+
+#SPORTS
+@login_required(login_url='Login')
+def Sports(request):
+    articles = Article.objects.filter(Category='Sports')[:12]
+    return render(request, "Sports.html", {'articles': articles})
 
 def Try(request):
     return render(request, "try.html")
@@ -75,20 +80,7 @@ def Try(request):
 #TECHNOLOGY
 @login_required(login_url='Login')
 def Technology(request):
-    articles = []
-    # Specify the full path to the CSV file
-    csv_file_path = r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Technology_articles.csv'
-    
-    # Read data from CSV file
-    with open(csv_file_path, mode='r', newline='', encoding='utf-8') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            row = {key.strip('\ufeff'): value for key, value in row.items()}
-            articles.append(row)
-    
-    # Print articles for debugging
-    print(articles)
-
+    articles = Article.objects.filter(Category='Technology')[:12]
     return render(request, "Technology.html", {'articles': articles})
 
 def Try(request):
@@ -97,20 +89,7 @@ def Try(request):
 #EDUCATION
 @login_required(login_url='Login')
 def Education(request):
-    articles = []
-    # Specify the full path to the CSV file
-    csv_file_path = r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Education_articles.csv'
-    
-    # Read data from CSV file
-    with open(csv_file_path, mode='r', newline='', encoding='utf-8') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            row = {key.strip('\ufeff'): value for key, value in row.items()}
-            articles.append(row)
-    
-    # Print articles for debugging
-    print(articles)
-
+    articles = Article.objects.filter(Category='Education')[:12]
     return render(request, "Education.html", {'articles': articles})
 
 def Try(request):
@@ -119,20 +98,7 @@ def Try(request):
 #MOVIES
 @login_required(login_url='Login')
 def Movies(request):
-    articles = []
-    # Specify the full path to the CSV file
-    csv_file_path = r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Movies_articles.csv'
-    
-    # Read data from CSV file
-    with open(csv_file_path, mode='r', newline='', encoding='utf-8') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            row = {key.strip('\ufeff'): value for key, value in row.items()}
-            articles.append(row)
-    
-    # Print articles for debugging
-    print(articles)
-
+    articles = Article.objects.filter(Category='Movies')[:12]
     return render(request, "Movies.html", {'articles': articles})
 
 def Try(request):
@@ -141,20 +107,7 @@ def Try(request):
 #POLITICS
 @login_required(login_url='Login')
 def Politics(request):
-    articles = []
-    # Specify the full path to the CSV file
-    csv_file_path = r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Politics_articles.csv'
-    
-    # Read data from CSV file
-    with open(csv_file_path, mode='r', newline='', encoding='utf-8') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            row = {key.strip('\ufeff'): value for key, value in row.items()}
-            articles.append(row)
-    
-    # Print articles for debugging
-    print(articles)
-
+    articles = Article.objects.filter(Category='Politics')[:12]
     return render(request, "Politics.html", {'articles': articles})
 
 def Try(request):
@@ -163,20 +116,7 @@ def Try(request):
 #NATURE
 @login_required(login_url='Login')
 def Nature(request):
-    articles = []
-    # Specify the full path to the CSV file
-    csv_file_path = r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Nature_articles.csv'
-    
-    # Read data from CSV file
-    with open(csv_file_path, mode='r', newline='', encoding='utf-8') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            row = {key.strip('\ufeff'): value for key, value in row.items()}
-            articles.append(row)
-    
-    # Print articles for debugging
-    print(articles)
-
+    articles = Article.objects.filter(Category='Nature')[:12]
     return render(request, "Nature.html", {'articles': articles})
 
 def Try(request):
@@ -185,75 +125,31 @@ def Try(request):
 #TRAVEL
 @login_required(login_url='Login')
 def Travel(request):
-    articles = []
-    # Specify the full path to the CSV file
-    csv_file_path = r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Travel_articles.csv'
-    
-    # Read data from CSV file
-    with open(csv_file_path, mode='r', newline='', encoding='utf-8') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            row = {key.strip('\ufeff'): value for key, value in row.items()}
-            articles.append(row)
-    
-    # Print articles for debugging
-    print(articles)
-
+    articles = Article.objects.filter(Category='Travel')[:12]
     return render(request, "Travel.html", {'articles': articles})
 
 def Try(request):
     return render(request, "try.html")
 
-#SPORTS
-@login_required(login_url='Login')
-def Sports(request):
-    articles = []
-    # Specify the full path to the CSV file
-    csv_file_path = r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Sports_articles.csv'
-    
-    # Read data from CSV file
-    with open(csv_file_path, mode='r', newline='', encoding='utf-8') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            row = {key.strip('\ufeff'): value for key, value in row.items()}
-            articles.append(row)
-    
-    # Print articles for debugging
-    print(articles)
 
-    return render(request, "Sports.html", {'articles': articles})
+#Saved
+def saved(request):
+    articles=Bookmark.objects.filter(user=request.user)
+    return render(request, "saved.html", {'articles': articles})
+          
+#Bookmark
+@login_required
+def add_bookmark(request, *args, **kwargs):
+    article_pk = kwargs['pk']  # Get the primary key of the article from kwargs
+    article = Article.objects.get(pk=article_pk)
+    bookmark, created = Bookmark.objects.get_or_create(user=request.user, article=article)
+    return redirect('saved')
 
-def Try(request):
-    return render(request, "try.html")
-
-       
-#BUISNESS
-@login_required(login_url='Login')
-def Business(request):
-    articles = []
-    # Specify the full path to the CSV file
-    csv_file_path = r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Business_articles.csv'
-    
-    # Read data from CSV file
-    with open(csv_file_path, mode='r', newline='', encoding='utf-8') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            row = {key.strip('\ufeff'): value for key, value in row.items()}
-            articles.append(row)
-    
-    # Print articles for debugging
-    print(articles)
-
-    return render(request, "Business.html", {'articles': articles})
-
-def Try(request):
-    return render(request, "try.html")
-
-       
-           
-    
-
-
+@login_required
+def remove_bookmark(request, *args, **kwargs):
+    article_pk = kwargs['pk']  # Get the primary key of the article from kwargs
+    Bookmark.objects.get(user=request.user, pk=article_pk).delete()
+    return redirect('saved')
        
            
 from django.shortcuts import render
@@ -360,5 +256,55 @@ def Hybrid(request):
     
 
 
-       
     
+from django.shortcuts import render
+
+import csv
+from datetime import datetime
+from django.db import models
+from base.models import Article
+
+def load_articles_from_csv(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            category = row['Category']
+            title = row['Title']
+            title_link = row['Title_link']
+            image = row['Image']
+            date = datetime.strptime(row['Date'], '%B %d, %Y')
+            summary = row['Summary']
+            content = row['Content']
+            field1 = row['Field1']
+            
+            # Create and save Article instance
+            article = Article.objects.create(
+                Category=category,
+                Title=title,
+                Title_link=title_link,
+                Image=image,
+                Date=date,
+                Summary=summary,
+                Content=content,
+                Field1=field1
+            )
+
+def csv_forall(request):
+    list=[
+        r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Business_articles.csv',
+        r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Education_articles.csv',
+        r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\healthline_articles.csv',
+        r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Movies_articles.csv',
+        r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Nature_articles.csv',
+        r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Politics_articles.csv',
+        r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Sports_articles.csv',
+        r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Technology_articles.csv',
+        r'C:\Users\Sonal R Sonarghare\article\QuickReads\Scrape\Travel_articles.csv',
+        
+        
+    ]
+    
+    for i in list:
+        load_articles_from_csv(i)
+
+    return HttpResponse("Done.")   

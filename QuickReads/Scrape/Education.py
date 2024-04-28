@@ -34,7 +34,7 @@ with open('Education_articles.csv', 'w', newline='', encoding='utf-8-sig') as cs
     writer = csv.writer(csvfile)
 
     # Write header row
-    writer.writerow(['Article_ID', 'Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
+    writer.writerow(['Article_ID','Category', 'Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
 
     article_id =299   # Initialize article ID counter
 
@@ -106,9 +106,10 @@ with open('Education_articles.csv', 'w', newline='', encoding='utf-8-sig') as cs
 
         # Combine all extracted text into a single string
         combined_text = ' '.join( extracted_texts)
-
+        
+        category='Education'
         # Write data to CSV
-        writer.writerow([article_id, title, title_link, image_url, Date, summary, combined_text])
+        writer.writerow([article_id,category, title, title_link, image_url, Date, summary, combined_text])
 
         # Navigate back to the news page and re-find the articles
         driver.execute_script("window.history.go(-1)")

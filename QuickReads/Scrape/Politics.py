@@ -28,7 +28,7 @@ with open('Politics_articles.csv', 'w', newline='', encoding='utf-8-sig') as csv
     writer = csv.writer(csvfile)
 
     # Write header row
-    writer.writerow(['Article_ID','Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
+    writer.writerow(['Article_ID','Category','Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
     article_id =499  
     # Find all articles on the page
     articles = driver.find_elements(By.CSS_SELECTOR, ".articles")
@@ -81,9 +81,10 @@ with open('Politics_articles.csv', 'w', newline='', encoding='utf-8-sig') as csv
         p_elements = driver.find_elements(By.TAG_NAME, "p")
         extracted_texts = [p_element.text for p_element in p_elements]
         combined_text = ' '.join( extracted_texts)
-
+        
+        category='Politics'
         # Write data to CSV
-        writer.writerow([article_id,title,title_link,image_url,date,summary,combined_text])
+        writer.writerow([article_id,category,title,title_link,image_url,date,summary,combined_text])
         driver.execute_script("window.history.go(-1)")
         wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".articles")))
         #articles = driver.find_elements(By.CSS_SELECTOR, ".css-18vzruc")

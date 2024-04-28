@@ -27,7 +27,7 @@ with open('Nature_articles.csv', 'w', newline='', encoding='utf-8-sig') as csvfi
     writer = csv.writer(csvfile)
 
     # Write header row
-    writer.writerow(['Article_ID','Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
+    writer.writerow(['Article_ID','Category','Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
     article_id =599  
     # Find all articles on the page
     articles = driver.find_elements(By.CSS_SELECTOR, ".bs_col-12.bs_col-md-6.bs_col-sm-6.bs_col-lg-4.bs_d-flex.bs_align-items-stretch")
@@ -85,8 +85,9 @@ with open('Nature_articles.csv', 'w', newline='', encoding='utf-8-sig') as csvfi
         p_elements = driver.find_elements(By.CSS_SELECTOR, ".rich-text-editor p")
         extracted_texts = [p_element.text for p_element in p_elements]
         combined_text = ' '.join( extracted_texts)
+        category='Nature'
         # Write data to CSV
-        writer.writerow([article_id,title,title_link,image_url,date,summary,combined_text])
+        writer.writerow([article_id,category,title,title_link,image_url,date,summary,combined_text])
         driver.execute_script("window.history.go(-1)")
         wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".bs_col-12.bs_col-md-6.bs_col-sm-6.bs_col-lg-4.bs_d-flex.bs_align-items-stretch")))
         #articles = driver.find_elements(By.CSS_SELECTOR, ".css-18vzruc")

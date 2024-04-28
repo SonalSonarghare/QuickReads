@@ -27,7 +27,7 @@ with open('healthline_articles.csv', 'w', newline='', encoding='utf-8-sig') as c
     writer = csv.writer(csvfile)
     
     # Write header row
-    writer.writerow(['Article_ID','Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
+    writer.writerow(['Article_ID','Category','Title', 'Title_link', 'Image', 'Date', 'Summary', 'Content'])
     
     # Find all articles on the page
     articles = driver.find_elements(By.CSS_SELECTOR, ".css-18vzruc")
@@ -81,9 +81,9 @@ with open('healthline_articles.csv', 'w', newline='', encoding='utf-8-sig') as c
 
         # Combine all extracted text into a single string
         combined_text = ' '.join(extracted_li + extracted_texts)
-        
+        category='Health'
         # Write data to CSV
-        writer.writerow([article_id,title, title_link, image_url, date, summary, combined_text])
+        writer.writerow([article_id,category,title, title_link, image_url, date, summary, combined_text])
         
         # Navigate back to the news page and re-find the articles
         driver.execute_script("window.history.go(-1)")

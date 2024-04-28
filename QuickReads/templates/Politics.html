@@ -130,7 +130,6 @@
       </nav>
     </div>
   </header>
-
   <section class="hero">
     <div class="container">
       <h1>#POLITICS</h1>
@@ -142,14 +141,14 @@
       <p>The best of everything you follow</p>
     </div>
   </section>
-
+  
   <section class="Topics" id="Topics">
     <div class="box-container">
       {% for article in articles %}
       <div class="flip-container box" onclick="flipCard(this, event)">
         <div class="flipper">
           <div class="front">
-             <!-- Front side content -->
+            <!-- Front side content -->
             <div class="circle-logo">
               <a href="https://indianexpress.com/section/political-pulse/" target="_blank">
                 <img src="/static/img/Topics/5.png" alt="Movies">
@@ -166,7 +165,7 @@
             </div>
             <div class="title">
               <a href="{{ article.Title_link}}" target="_blank">
-              {{article.Title}}
+                {{article.Title}}
               </a>
             </div>
             <div class="content">
@@ -175,7 +174,7 @@
             <div class="userdata">
               <i class="fa-regular fa-heart" onclick="toggleHeart(this)"></i><span class="heart-count"> 0</span> 
               <i class="fa-regular fa-comment-dots"></i> <span class="comment-count">0</span>
-              <i class="fa-regular fa-bookmark"></i>
+              <a href="{% url 'add_bookmark' article.id %}"><i class="fa-regular fa-bookmark"></i></a>
               <i class="fa-solid fa-arrow-up-from-bracket"onclick="shareArticle('{{article.Title_link}}', '{{article.Title}}')"></i>
             </div>
             <div class="comment-box" style="display: none;">
@@ -185,23 +184,20 @@
           </div>
           <div class="back">
             <div class="read_aloud">
-                <button class="read-aloud-btn"><i class="fa-solid fa-volume-high"></i></button>
+              <button class="read-aloud-btn"><i class="fa-solid fa-volume-high"></i></button>
             </div>
             <div class="summary">
-                {{article.Field1}}
+              {{article.Field1}}
             </div>
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
-
-      <!-- Add more flip-container boxes here if needed -->
-      
-    </div>
+  
+    <!-- Add more flip-container boxes here if needed -->
   </section>
-</section>
-
+  
 <footer>
   <div class="container">
     <h1>&copy; QuickReads 2024</h1>
