@@ -34,7 +34,7 @@ urlpatterns = [
     path('Travel/',views.Travel),
     path('Sports/',views.Sports,name='Sports'),
     path('Business/',views.Business,name='Business'),
-    path('Hybrid/',views.Hybrid),
+    #path('Hybrid/',views.Hybrid),
     path('Login/',views.Login,name='Login'),
     path('Register/',views.Register,name='Register'),
     path('Logout/',views.logoutUser,name='Logout'),
@@ -42,6 +42,5 @@ urlpatterns = [
     path('add_bookmark/<str:pk>/', views.add_bookmark, name='add_bookmark'),
     path('remove_bookmark/<str:pk>/', views.remove_bookmark, name='remove_bookmark'),
     path('csv/', views.csv_forall, name='csv'),
+    path('my_view/', views.my_view, name='my_view')
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

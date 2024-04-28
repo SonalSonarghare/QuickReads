@@ -118,10 +118,11 @@
           <li class="dropdown">
             <a href="#" class="dropbtn"><i class="fa-regular fa-user"></i></a>
             <div class="dropdown-content">
-              <span class="welcome-text">{{ request.user }}</span>
+              <a href="#"><span class="welcome-text">{{ request.user }}</span>
+              <a href="{% url 'Home' %}"><i class="fa-solid fa-house"></i></i>Home</a>
+              <a href="/my_view"><i class="fa-solid fa-book-open-reader"></i>  Top Recommended Article</a>
               <a href="#"><i class="fa-solid fa-user"></i>    Profile</a>
-              <a href="#"><i class="fa-solid fa-bookmark"></i> Saved</a>
-              <a href="#"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+              <a href="/saved"><i class="fa-solid fa-bookmark"></i> Saved</a>
               <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
               <a href="{% url 'Logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
             </div>
@@ -132,9 +133,13 @@
   </header>
 
   <section class="hero">
+    <div class="container">
+      <h1>#BookMark</h1>
+      <p>See your Saved Article here.</p>
+    </div>
     <div class="foryou">
-        <h1>BOOKMARK</h1>
-        <p>See your Bookmarked Articles here</p>
+      <h1>FOR YOU <a href="/my_view"><i class="fa-solid fa-sliders" style="color: #333;"></i></a></h1>
+      <p>The best of everything you follow</p>
     </div>
 </section>
 
@@ -146,11 +151,42 @@
                 <div class="front">
                     <!-- Front side content -->
                     <div class="circle-logo">
-                        <a href="https://www.healthline.com/" target="_blank">
-                            <img src="/static/img/Topics/1.png" alt="Healthline">
-                            <h1>Healthline</h1>
-                        </a>
-                    </div>
+                          {% if article.article.Category == "Health" %}
+                          <a href="https://www.healthline.com/" target="_blank">
+                            <img src="/static/img/Topics/1.png" alt="Healthline"></a>
+                          {% elif article.article.Category == "Technology" %}
+                          <a href="https://www.bbc.com/news" target="_blank">
+                            <img src="/static/img/Topics/2.png" alt="BBC News"></a>
+                          {% elif article.article.Category == "Education" %}
+                          <a href="https://www.edutopia.org/" target="_blank">
+                            <img src="/static/img/Topics/3.png" alt="Education"></a>
+                          {% elif article.article.Category == "Movies" %}
+                          <a href="https://theconversation.com/global/topics/film-1175" target="_blank">
+                              <img src="/static/img/Topics/4.png" alt="Movies"></a>
+                          {% elif article.article.Category == "Politics" %}
+                          <a href="https://indianexpress.com/section/political-pulse/" target="_blank">
+                              <img src="/static/img/Topics/5.png" alt="Politics"></a>
+                          {% elif article.article.Category == "Sports" %}
+                          <a href="https://indianexpress.com/section/sports/" target="_blank">
+                              <img src="/static/img/Topics/5.png" alt="The Indian Express"></a>
+                          {% elif article.article.Category == "Business" %}
+                          <a href="https://indianexpress.com/section/business/" target="_blank">
+                            <img src="/static/img/Topics/5.png" alt="The Indian Express"></a>
+                          {% elif article.article.Category == "Travel" %}
+                          <a href="https://www.lonelyplanet.com/" target="_blank">
+                            <img src="/static/img/Topics/7.png" alt="Lonely Planet"></a>
+                          {% elif article.article.Category == "Nature" %}
+                          <a href="https://www.nature.org/en-us/" target="_blank">
+                            <img src="/static/img/Topics/6.png" alt="BBC News"></a>
+                          {% else %}
+                          <a href="https://www.healthline.com/" target="_blank">
+                            <img src="/static/img/Topics/1.png" alt="Healthline"></a>
+                          {% endif %}
+                          <div style="text-align: right; margin-right: 230px;">
+                            <h1>{{ article.article.Category }}</h1>
+                        </div>
+                  </div>
+                  
                     <div class="photo">
                         <a href="{{ article.article.Title_link }}" target="_blank">
                             <img src="{{ article.article.Image }}" alt="Article Image">

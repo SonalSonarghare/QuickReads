@@ -118,10 +118,11 @@
           <li class="dropdown">
             <a href="#" class="dropbtn"><i class="fa-regular fa-user"></i></a>
             <div class="dropdown-content">
-              <span class="welcome-text">{{ request.user }}</span>
+              <a href="#"><span class="welcome-text">{{ request.user }}</span>
+              <a href="{% url 'Home' %}"><i class="fa-solid fa-house"></i></i>Home</a>
+              <a href="/my_view"><i class="fa-solid fa-book-open-reader"></i>  Top Recommended Article</a>
               <a href="#"><i class="fa-solid fa-user"></i>    Profile</a>
-              <a href="#"><i class="fa-solid fa-bookmark"></i> Saved</a>
-              <a href="#"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+              <a href="/saved"><i class="fa-solid fa-bookmark"></i> Saved</a>
               <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
               <a href="{% url 'Logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
             </div>
@@ -137,7 +138,7 @@
          Discover our growing collection of curated stories on Nature.</p>
     </div>
     <div class="foryou">
-      <h1>FOR YOU <a href="#"><i class="fa-solid fa-sliders" style="color: #333;"></i></a></h1>
+      <h1>FOR YOU <a href="/my_view"><i class="fa-solid fa-sliders" style="color: #333;"></i></a></h1>
       <p>The best of everything you follow</p>
     </div>
   </section>

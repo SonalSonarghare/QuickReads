@@ -98,10 +98,11 @@
           <li class="dropdown">
             <a href="#" class="dropbtn"><i class="far fa-user"></i></a>
             <div class="dropdown-content">
-              <span class="welcome-text">{{ request.user }}</span>
+              <a href="#"><span class="welcome-text">{{ request.user }}</span>
+              <a href="{% url 'Home' %}"><i class="fa-solid fa-house"></i></i>Home</a>
+              <a href="/my_view"><i class="fa-solid fa-book-open-reader"></i>  Top Recommended Article</a>
               <a href="#"><i class="fas fa-user"></i>    Profile</a>
-              <a href="#"><i class="fas fa-bookmark"></i> Saved</a>
-              <a href="#"><i class="fas fa-chart-line"></i> Analytics</a>
+              <a href="/saved"><i class="fas fa-bookmark"></i> Saved</a>
               <a href="#"><i class="fas fa-cog"></i> Settings</a>
               <a href="{% url 'Logout' %}"><i class="fas fa-arrow-right"></i> Logout</a>
             </div>
@@ -119,7 +120,7 @@
          Discover our growing collection of curated stories on Health.</p>
     </div>
     <div class="foryou">
-      <h1>FOR YOU <a href="#"><i class="fas fa-sliders" style="color: #333;"></i></a></h1>
+      <h1>FOR YOU <a href="/my_view"><i class="fas fa-sliders" style="color: #333;"></i></a></h1>
       <p>The best of everything you follow</p>
     </div>
   </section>

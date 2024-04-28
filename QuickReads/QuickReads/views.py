@@ -151,8 +151,8 @@ def remove_bookmark(request, *args, **kwargs):
     Bookmark.objects.get(user=request.user, pk=article_pk).delete()
     return redirect('saved')
        
-           
-from django.shortcuts import render
+
+          
 from django.http import HttpResponse
 import pandas as pd
 import numpy as np
@@ -163,23 +163,34 @@ from sklearn.metrics import pairwise_distances
 from scipy.sparse import csr_matrix
 from datetime import datetime
 
-# Load data
-df_user = pd.read_csv('C:/Users/Sonal R Sonarghare/article/QuickReads/streamlit_apps/user_interactions_2500_rows.csv', encoding='latin1')
-df_articles = pd.read_csv('C:/Users/Sonal R Sonarghare/article/QuickReads/streamlit_apps/Article_data.csv', encoding='latin1')
+# Load user interactions and articles data
+df_user = pd.read_csv('Scrape/user_interactions.csv', encoding='utf-8-sig')
+df_articles = pd.read_csv('Scrape/Final(1).csv', encoding='utf-8-sig')
 
-# Create TF-IDF vectorizer for article titles
+# Preprocess user interactions data
+df_user['Timestamp'] = pd.to_datetime(df_user['Timestamp'], format='%d-%m-%Y %H:%M')
+df_user = df_user.sort_values(by='Timestamp', ascending=False)
+df_user = df_user.drop_duplicates(subset=['User ID', 'Article_ID', 'Action'])
+
+# Preprocess articles data
+df_articles['Date'] = pd.to_datetime(df_articles['Date'])
+
+
+# Create a TF-IDF vectorizer for article titles and types
 tfidf_vectorizer = TfidfVectorizer(stop_words='english')
 tfidf_matrix_title = tfidf_vectorizer.fit_transform(df_articles['Title'])
+tfidf_matrix_type = tfidf_vectorizer.fit_transform(df_articles['Type'])
 
 # Compute similarity scores based on article titles
 cosine_sim_title = linear_kernel(tfidf_matrix_title, tfidf_matrix_title)
+cosine_sim_type = linear_kernel(tfidf_matrix_type, tfidf_matrix_type)
 
 # Normalize interaction scores
 scaler = MinMaxScaler()
 df_user['Interaction_score'] = scaler.fit_transform(df_user['Action'].map({'view': 1, 'like': 2, 'comment': 3, 'share': 4, 'bookmark': 5}).values.reshape(-1, 1))
 
 # Create user-item interaction matrix
-user_item_matrix = df_user.pivot_table(index='User ID', columns='Article ID', values='Interaction_score', fill_value=0)
+user_item_matrix = df_user.pivot_table(index='User ID', columns='Article_ID', values='Interaction_score', fill_value=0)
 
 # Convert user-item matrix to sparse matrix
 sparse_user_item = csr_matrix(user_item_matrix.values)
@@ -187,75 +198,56 @@ sparse_user_item = csr_matrix(user_item_matrix.values)
 # Compute user similarity matrix based on interactions
 user_similarity = pairwise_distances(sparse_user_item, metric='cosine')
 
-# Placeholder function for collaborative recommendations
+# Collaborative filtering recommendations
 def get_collaborative_recommendations(user_id, n=6):
+    if user_id not in user_item_matrix.index:
+        print(f"User ID {user_id} not found in user_item_matrix.")
+        return pd.DataFrame(columns=['Article_ID', 'Title', 'Title_link'])
+
     user_index = user_item_matrix.index.get_loc(user_id)
     user_similarities = user_similarity[user_index]
     similar_users_indices = np.argsort(user_similarities)[1:n+1]
     similar_users_interactions = user_item_matrix.iloc[similar_users_indices]
     aggregated_scores = similar_users_interactions.sum(axis=0)
     recommended_article_ids = aggregated_scores.nlargest(n).index
-    recommended_articles = df_articles[df_articles['Article ID'].isin(recommended_article_ids)]
-    return recommended_articles[['Article ID', 'Title', 'Title_link']]
+    recommended_articles = df_articles[df_articles['Article_ID'].isin(recommended_article_ids)]
+    return recommended_articles[['Article_ID', 'Title', 'Title_link']]
 
-# Function to get content-based recommendations
+# Content-based filtering recommendations
 def get_content_based_recommendations(user_id, n=6):
     user_interactions = df_user[df_user['User ID'] == user_id]
-    viewed_articles = user_interactions[user_interactions['Action'] == 'view']
-    viewed_article_ids = viewed_articles['Article ID'].tolist()
 
-    if len(viewed_article_ids) == 0:
-        return df_articles.sample(n=n)[['Article ID', 'Title', 'Title_link']]
+    if user_interactions.empty:
+        return pd.DataFrame(columns=['Article_ID', 'Title', 'Title_link'])
 
-    viewed_article_indices = df_articles[df_articles['Article ID'].isin(viewed_article_ids)].index
-    similar_articles_scores = cosine_sim_title[viewed_article_indices].sum(axis=0)
-    similar_articles_indices = np.argsort(similar_articles_scores)[::-1]
-    recommended_article_ids = [df_articles.iloc[i]['Article ID'] for i in similar_articles_indices if df_articles.iloc[i]['Article ID'] not in viewed_article_ids][:n]
-    recommended_articles = df_articles[df_articles['Article ID'].isin(recommended_article_ids)]
-    return recommended_articles[['Article ID', 'Title', 'Title_link']]
+    viewed_article_ids = user_interactions['Article_ID'].tolist()
+    avg_cosine_sim = (cosine_sim_title + cosine_sim_type) / 2.0
+    viewed_article_indices = df_articles[df_articles['Article_ID'].isin(viewed_article_ids)].index
+    avg_similarities = avg_cosine_sim[viewed_article_indices].mean(axis=0)
+    top_indices = np.argsort(avg_similarities)[::-1][:n]
+    recommended_article_ids = df_articles.iloc[top_indices]['Article_ID']
+    recommended_articles = df_articles[df_articles['Article_ID'].isin(recommended_article_ids)]
 
-# Function to get hybrid recommendations combining collaborative and content-based
-def get_hybrid_recommendations(user_id, n=6):
+    return recommended_articles[['Article_ID', 'Title', 'Title_link']]
+
+# Hybrid recommendations
+def get_hybrid_recommendations(user_id, n=7):
     collaborative_recommendations = get_collaborative_recommendations(user_id, n)
     content_based_recommendations = get_content_based_recommendations(user_id, n)
+    hybrid_recommendations = pd.merge(collaborative_recommendations, content_based_recommendations, on=['Article_ID','Title', 'Title_link'], how='outer')
+    hybrid_recommendations = hybrid_recommendations.drop_duplicates(subset=['Title', 'Title_link'])
+    hybrid_recommendations = hybrid_recommendations.merge(df_articles[['Article_ID','Type','Title','Title_link','Image','Date', 'Summary', 'Content', 'Field1']], on=['Article_ID','Title', 'Title_link'], how='left')
+    return hybrid_recommendations.values.tolist() 
 
-    hybrid_recommendations = pd.merge(collaborative_recommendations, content_based_recommendations, on=['Title', 'Title_link'], how='outer')
-    hybrid_recommendations = hybrid_recommendations.drop_duplicates(subset=['Title', 'Title_link']).head(n)
-
-    # Add 'Article ID' column to the recommendations DataFrame
-    hybrid_recommendations = hybrid_recommendations.merge(df_articles[['Article ID', 'Title', 'Title_link']], on=['Title', 'Title_link'], how='left')
-
-    return hybrid_recommendations[['Article ID', 'Title', 'Title_link']]
-
-# Define Django view
-def Hybrid(request):
-    if request.method == 'GET':
-        user_id = request.GET.get('user_id', None)
-        if user_id is not None:
-            try:
-                user_id = int(user_id)
-            except ValueError:
-                return HttpResponse("Please enter a valid User ID (integer).")
-
-            # Get recommendations
-            top_hybrid_recommendations = get_hybrid_recommendations(user_id)
-
-            # Display recommendations
-            if not top_hybrid_recommendations.empty:
-                context = {
-                    'user_id': user_id,
-                    'recommendations': top_hybrid_recommendations.to_html(index=False)
-                }
-                return render(request, 'hybrid_recommendations.html', context)
-            else:
-                return HttpResponse("No recommendations found for this user.")
-        else:
-            return HttpResponse("Please provide a User ID.")
+# Django view function
+def my_view(request):
+    if request.user.is_authenticated:
+        user_id = request.user.id
+        top_hybrid_recommendations = get_hybrid_recommendations(user_id)
+        print(top_hybrid_recommendations)  # Print the content
+        return render(request, 'my_view.html', {'articles': top_hybrid_recommendations})
     else:
-        return HttpResponse("Invalid request method.")           
-    
-
-
+        return HttpResponse("User is not authenticated")
     
 from django.shortcuts import render
 
@@ -308,3 +300,5 @@ def csv_forall(request):
         load_articles_from_csv(i)
 
     return HttpResponse("Done.")   
+
+

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/30846f7280.js" crossorigin="anonymous"></script>
+  <title>QuickReads | Your Daily Article Dose</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link rel="stylesheet" href="/static/css/Health.css">
+  
+  <style>
+    /* Your CSS styles here */
+   /* Button styling */
+   .toggle-button {
+     position: fixed;
+     bottom: 20px;
+     right: 20px;
+     padding: 15px;
+     border-radius: 50%;
+     background-color:#440100;
+     color: white; font-weight: bold;
+     border: none;
+     cursor: pointer;
+     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+     transition: background-color 0.3s, transform 0.3s;
+   }
+   .toggle-button:hover {
+       background-color: #fff;
+       color: #440100;
+       font-weight: bold;
+       transform: scale(1.1);
+     }
+   /* Dialog box styling */
+   .dialog-box button {
+     background-color: #440100;
+     color: white;
+     border: none;
+     padding: 10px 20px;
+     border-radius: 5px;
+     margin-top: 10px;
+     cursor: pointer;
+     transition: background-color 0.3s;
+   }
+   
+   .dialog-box button:hover {
+     background-color: #6e0e0a;
+   }
+   .dialog-box {
+     position: fixed;
+     bottom: 70px;
+     right: 20px;
+     background-color: white;
+     padding: 20px;
+     border-radius: 5px;
+     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+     display: none;
+     max-width: 300px; /* Adjust as needed */
+     z-index: 1000; /* Ensure dialog is on top of other elements */
+   }
+   /* Overlay styling */
+   .overlay {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.5);
+     display: none;
+     z-index: 999; /* Ensure overlay is below dialog */
+   }
+
+   .search-form input[type='text'] {
+     width:150px;
+     height: 30px; /* Adjust the height as needed */
+   }
+ </style>
+</head>
+<body>
+  <!-- Button to toggle dialog box -->
+  <button class="toggle-button" onclick="toggleDialog()">
+    <i class="fas fa-book"></i> Open Dictionary
+  </button>
+  
+
+  <!-- Dialog box -->
+  <div class="dialog-box" id="dialogBox">
+    <div class="container">
+       
+        <div class="search-form">
+           <input type='text' placeholder='Type any word'>
+           <button onclick="fetchandCreateCard()">Search</button>
+        </div>
+
+        <div class="dictionary-app">
+              <!-- Content will be inserted here dynamically -->
+        </div>
+
+    </div>
+    <button class="close-btn" onclick="closeDialog()">Close</button>
+  </div>
+
+  <!-- Overlay to darken background when dialog is open -->
+  <div class="overlay" onclick="closeDialog()"></div>
+
+  <header>
+    <div class="container">
+      <a href="#" class="logo">
+        <img src="/static/img/logo_q.png" alt="QuickReads Logo">
+      </a>
+      <h1>QUICKREADS</h1>
+      <nav>
+        <ul>
+          <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i> Search</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#"><i class="fa-solid fa-plus"></i> Follow</a></li>
+          <li><a href="#"><i class="fa-regular fa-bell"></i></a></li>
+          <!-- Dropdown Menu for User -->
+          <li class="dropdown">
+            <a href="#" class="dropbtn"><i class="fa-regular fa-user"></i></a>
+            <div class="dropdown-content">
+              <a href="#"><span class="welcome-text">{{ request.user }}</span>
+              <a href="{% url 'Home' %}"><i class="fa-solid fa-house"></i></i>Home</a>
+              <a href="/my_view"><i class="fa-solid fa-book-open-reader"></i>  Top Recommended Article</a>
+              <a href="#"><i class="fa-solid fa-user"></i>    Profile</a>
+              <a href="/saved"><i class="fa-solid fa-bookmark"></i> Saved</a>
+              <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+              <a href="{% url 'Logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <section class="hero">
+    <div class="container">
+      <h1>#Your Top Personlized Recommended Articles</h1>
+      <p>Get the latest articles and news about all topics on QuickReads.<br>
+        Discover our growing collection of curated stories on Business.</p>
+    </div>
+    <div class="foryou">
+      <h1>FOR YOU <a href="/my_view"><i class="fa-solid fa-sliders" style="color: #333;"></i></a></h1>
+      <p>The best of everything you follow</p>
+    </div>
+  </section>
+  
+  <section class="Topics" id="Topics">
+    <div class="box-container">
+      {% for article in articles %}
+      <div class="flip-container box" onclick="flipCard(this, event)">
+        <div class="flipper">
+          <div class="front">
+            <!-- Front side content -->
+            <div class="circle-logo">
+                {% if article.3 == "Health" %}
+                <a href="https://www.healthline.com/" target="_blank">
+                  <img src="/static/img/Topics/1.png" alt="Healthline"></a>
+                {% elif article.3 == "Technology" %}
+                <a href="https://www.bbc.com/news" target="_blank">
+                  <img src="/static/img/Topics/2.png" alt="BBC News"></a>
+                {% elif article.3 == "Education" %}
+                <a href="https://www.edutopia.org/" target="_blank">
+                  <img src="/static/img/Topics/3.png" alt="Education"></a>
+                {% elif article.3 == "Movies" %}
+                <a href="https://theconversation.com/global/topics/film-1175" target="_blank">
+                    <img src="/static/img/Topics/4.png" alt="Movies"></a>
+                {% elif article.3 == "Politics" %}
+                <a href="https://indianexpress.com/section/political-pulse/" target="_blank">
+                    <img src="/static/img/Topics/5.png" alt="Politics"></a>
+                {% elif article.3 == "Sports" %}
+                <a href="https://indianexpress.com/section/sports/" target="_blank">
+                    <img src="/static/img/Topics/5.png" alt="The Indian Express"></a>
+                {% elif article.3 == "Business" %}
+                <a href="https://indianexpress.com/section/business/" target="_blank">
+                  <img src="/static/img/Topics/5.png" alt="The Indian Express"></a>
+                {% elif article.3 == "Travel" %}
+                <a href="https://www.lonelyplanet.com/" target="_blank">
+                  <img src="/static/img/Topics/7.png" alt="Lonely Planet"></a>
+                {% elif article.3 == "Nature" %}
+                <a href="https://www.nature.org/en-us/" target="_blank">
+                  <img src="/static/img/Topics/6.png" alt="BBC News"></a>
+                {% else %}
+                <a href="https://www.healthline.com/" target="_blank">
+                  <img src="/static/img/Topics/1.png" alt="Healthline"></a>
+                {% endif %}
+                  <h1>{{ article.3 }}</h1>
+            </div>
+           
+            <div class="photo">
+              <a href="{{ article.3}}" target="_blank">
+                <img src="{{ article.4 }}" alt="Article Image" style="width: 400px; height: 250px;">
+              </a>
+            </div>
+            <div class="date" style="margin-right:-1px">
+              {{ article.5 }}
+            </div>
+            <div class="title">
+              <a href="{{ article.2 }}" target="_blank">
+                {{ article.1 }}
+              </a>
+            </div>
+            <div class="content">
+              {{ article.6 }}
+            </div>
+            <div class="userdata">
+              <i class="fa-regular fa-heart" onclick="toggleHeart(this)"></i><span class="heart-count"> 0</span>
+              <i class="fa-regular fa-comment-dots"></i> <span class="comment-count">0</span>
+              <i class="fa-regular fa-bookmark"></i></a>
+              <i class="fa-solid fa-arrow-up-from-bracket" onclick="shareArticle('{{ article.Title_link }}', '{{ article.Title }}')"></i>
+            </div>
+            <div class="comment-box" style="display: none;">
+              <textarea placeholder="Write your comment here..."></textarea>
+              <button class="submit-comment">Submit</button>
+            </div>
+          </div>
+          <div class="back">
+            <div class="read_aloud">
+              <button class="read-aloud-btn"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="summary">
+              {{ article.8}}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  
+
+<footer>
+  <div class="container">
+    <h1>&copy; QuickReads 2024</h1>
+    <div class="sources">
+      <h1>Sources:</h1>
+      <ul>
+        <li><a href="https://www.healthline.com/" target="_blank"><img src="/static/img/1.png" alt="Healthline"></a></li>
+        <li><a href="https://www.bbc.com/news" target="_blank" ><img src="/static/img/2.png" alt="BBC News"></a></li>
+        <li><a href="https://www.edutopia.org/" target="_blank"><img src="/static/img/3.png" alt="Edutopia"></a></li>
+        <li><a href="https://www.ndtv.com/" target="_blank"><img src="/static/img/4.png" alt="NDTV"></a></li>
+        <li><a href="https://www.empireonline.com/" target="_blank"><img src="/static/img/5.png" alt="Empire"></a></li>
+        <li><a href="https://www.wionews.com/sports/" target="_blank"><img src="/static/img/6.png" alt="WION"></a></li>
+        <li><a href="https://www.lonelyplanet.com/" target="_blank"><img src="/static/img/7.png" alt="LonelyPlanet"></a></li>
+        <li><a href="https://phys.org/earth-news/" target="_blank"><img src="/static/img/8.png" alt="PhysOrg"></a></li>
+        <li><a href="https://www.forbes.com/?sh=3c2cd5ad2254" target="_blank"><img src="/static/img/9.png" alt="Forbes"></a></li>
+        <!-- Add more sources as needed -->
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/health.js">
+</script>
+</body>
+</html>
