@@ -41,6 +41,9 @@ urlpatterns = [
     path('saved/',views.saved,name='saved'),
     path('add_bookmark/<str:pk>/', views.add_bookmark, name='add_bookmark'),
     path('remove_bookmark/<str:pk>/', views.remove_bookmark, name='remove_bookmark'),
+    path('like/',views.like,name='like'),
+    path('add_Like/<str:pk>/', views.add_Like, name='add_Like'),
+    path('remove_Like/<str:pk>/', views.remove_Like, name='remove_Like'),
     path('csv/', views.csv_forall, name='csv'),
     path('my_view/', views.my_view, name='my_view')
 ]

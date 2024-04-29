@@ -17,6 +17,7 @@ class Article(models.Model):
     Summary=models.TextField()
     Content=models.TextField()
     Field1=models.TextField()
+    likes = models.IntegerField(default=10)
     
     # Other fields as needed
 
@@ -24,4 +25,10 @@ class Bookmark(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
     

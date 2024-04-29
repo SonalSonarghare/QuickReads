@@ -5,7 +5,7 @@ from .forms import CreateUserForm
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-from base.models import Article, Bookmark
+from base.models import Article, Bookmark,Like
 import csv
 
 def Index(request):
@@ -150,6 +150,30 @@ def remove_bookmark(request, *args, **kwargs):
     article_pk = kwargs['pk']  # Get the primary key of the article from kwargs
     Bookmark.objects.get(user=request.user, pk=article_pk).delete()
     return redirect('saved')
+#Like
+def like(request):
+    articles=Like.objects.filter(user=request.user)
+    return render(request, "Like.html", {'articles': articles})
+#Like
+@login_required
+def add_Like(request, *args, **kwargs):
+    article_pk = kwargs['pk']  # Get the primary key of the article from kwargs
+    article = Article.objects.get(pk=article_pk)
+    like, created = Like.objects.get_or_create(user=request.user, article=article)
+    article.likes += 1  # Increment the likes count
+    article.save()
+    return redirect('like')
+
+@login_required
+def remove_Like(request, *args, **kwargs):
+    article_pk = kwargs['pk']  # Get the primary key of the article from kwargs
+    like = Like.objects.get(user=request.user, pk=article_pk)
+    article = like.article
+    article.likes -= 1  # Decrement the likes count
+    article.save()
+    like.delete()
+    return redirect('like')
+
        
 
           

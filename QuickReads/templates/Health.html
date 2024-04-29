@@ -73,6 +73,10 @@
       width:150px;
       height: 30px; /* Adjust the height as needed */
     }
+    .like-count {
+      font-size: 18px; /* Adjust the size as needed */
+      margin-left: 3px;
+    }
   </style>
 </head>
 <body>
@@ -122,6 +126,7 @@
               <a href="/my_view"><i class="fa-solid fa-book-open-reader"></i>  Top Recommended Article</a>
               <a href="#"><i class="fa-solid fa-user"></i>Profile</a>
               <a href="/saved"><i class="fa-solid fa-bookmark"></i>Saved</a>
+              <a href="/like"><i class="fa-solid fa-heart"></i>Like</a>
               <a href="#"><i class="fa-solid fa-gear"></i>Settings</a>
               <a href="{% url 'Logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
             </div>
@@ -174,7 +179,7 @@
               {{article.Summary}}
             </div>
             <div class="userdata">
-              <i class="fa-regular fa-heart" onclick="toggleHeart(this)"></i><span class="heart-count"> 0</span> 
+              <a href="{% url 'add_Like' article.id %}"><i class="fa-regular fa-heart"><span class="like-count">{{ article.likes }}</span></i></a>
               <i class="fa-regular fa-comment-dots"></i> <span class="comment-count">0</span>
               <a href="{% url 'add_bookmark' article.id %}"><i class="fa-regular fa-bookmark"></i></a>
               <i class="fa-solid fa-arrow-up-from-bracket"onclick="shareArticle('{{article.Title_link}}', '{{article.Title}}')"></i>

@@ -73,6 +73,11 @@
      width:150px;
      height: 30px; /* Adjust the height as needed */
    }
+   .like-count {
+    font-size: 18px; /* Adjust the size as needed */
+    margin-left: 3px;
+  }
+
  </style>
 </head>
 <body>
@@ -90,6 +95,7 @@
            <input type='text' placeholder='Type any word'>
            <button onclick="fetchandCreateCard()">Search</button>
         </div>
+
 
         <div class="dictionary-app">
               <!-- Content will be inserted here dynamically -->
@@ -123,6 +129,7 @@
               <a href="/my_view"><i class="fa-solid fa-book-open-reader"></i>  Top Recommended Article</a>
               <a href="#"><i class="fa-solid fa-user"></i>    Profile</a>
               <a href="/saved"><i class="fa-solid fa-bookmark"></i> Saved</a>
+              <a href="/like"><i class="fa-solid fa-heart"></i>Like</a>
               <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
               <a href="{% url 'Logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
             </div>
