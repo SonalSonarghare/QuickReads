@@ -55,9 +55,9 @@ For questions or support, please contact sonalsonarghare30@email.com.
 ![Article](https://github.com/SonalSonarghare/QuickReads/assets/116957485/58175f75-e578-476e-a4ea-7faf78b9c192)
 
 ## Summary📃  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Read Aloud🔊 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dictionary📙
-<img src="https://github.com/SonalSonarghare/QuickReads/assets/116957485/a5651942-9e04-4934-8c2f-f5e47172f9d8" alt="Summary" height="400" width="250">
-<img src="https://github.com/SonalSonarghare/QuickReads/assets/116957485/7b460d38-20dc-4746-abf6-21921a439ab4" alt="Read Aloud" height="400" width="250">
-<img src="https://github.com/SonalSonarghare/QuickReads/assets/116957485/9f054a8a-cd1f-4ffa-9ab8-cdf19af96ce4" alt="Read Aloud" height="400" width="250">
+<img src="https://github.com/SonalSonarghare/QuickReads/assets/116957485/a5651942-9e04-4934-8c2f-f5e47172f9d8" alt="Summary" height="400" width="280">
+<img src="https://github.com/SonalSonarghare/QuickReads/assets/116957485/7b460d38-20dc-4746-abf6-21921a439ab4" alt="Read Aloud" height="400" width="280">
+<img src="https://github.com/SonalSonarghare/QuickReads/assets/116957485/9f054a8a-cd1f-4ffa-9ab8-cdf19af96ce4" alt="Read Aloud" height="400" width="280">
 
 ## Top Recommended Articles🔝
 ![TopRecommended](https://github.com/SonalSonarghare/QuickReads/assets/116957485/f05cf1ba-47bb-4d4a-ae58-ac37fe318796)
